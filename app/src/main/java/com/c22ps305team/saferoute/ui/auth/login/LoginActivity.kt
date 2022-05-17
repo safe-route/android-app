@@ -1,11 +1,12 @@
-package com.c22ps305team.saferoute
+package com.c22ps305team.saferoute.ui.auth.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.c22ps305team.saferoute.R
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
     }
 }
