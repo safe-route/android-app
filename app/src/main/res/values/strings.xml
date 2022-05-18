@@ -4,4 +4,27 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_map">Map</string>
+    <string name="title_account">Account</string>
+
+    <string name="name">Name : </string>
+    <string name="email">Email : </string>
+
+
+    <string name="safe_state_text">Kamu Berada di daerah yang aman</string>
+    <string name="danger_state_text">Kamu Berada di daerah yang berbahaya</string>
+
+    <string name="safe_state">Aman</string>
+    <string name="danger_state">Berbahaya</string>
+    <string name="enter_danger_area">Anda Memasuki Daerah Berbahaya</string>
+
+    <string name="area_info">Info Daerah</string>
+    <string name="current_info">Info Terkini</string>
+    <string name="jakarta_pusat">Jakarta Pusat</string>
+    <string name="jakarta_selatan">Jakarta Selatan</string>
+    <string name="last_update">terkahir diupdate : %s</string>
+
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</string>
+
+
 </resources>
