@@ -13,12 +13,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".ui.bottomNav.BottomNav"
+            android:exported="false"
+            android:label="@string/title_activity_bottom_nav" />
 
         <receiver
             android:name=".ui.main.GeofenceBroadcastReceiver"
             android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:exported="true"></receiver>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
