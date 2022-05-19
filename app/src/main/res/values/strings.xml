@@ -24,8 +24,10 @@
     <string name="last_update">terkahir diupdate : %s</string>
 
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="notif_info">Opp’s, Maaf internet mu mengalami gangguan</string>
+    <string name="retry">Coba Lagi</string>
 
 
 </resources>

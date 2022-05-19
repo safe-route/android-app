@@ -12,14 +12,16 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/navigation_maps"
+        android:name="com.c22ps305team.saferoute.ui.main.location.MapsFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="com.c22ps305team.saferoute.ui.main.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 
-    <fragment
-        android:id="@+id/navigation_maps"
-        android:name="com.c22ps305team.saferoute.ui.main.location.MapsFragment"
-        android:label="@string/title_map"
-        tools:layout="@layout/fragment_maps" />
+
 </navigation>
