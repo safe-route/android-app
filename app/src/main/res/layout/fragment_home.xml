@@ -6,18 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_safe_state"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        >
+
+        <TextView
+            android:id="@+id/safe_desc"
+            style="@style/Text.Title"
+            android:layout_width="193dp"
+            android:layout_height="95dp"
+            android:text="Kamu Berada di daerah yang aman"
+            tools:layout_editor_absoluteX="7dp"
+            tools:layout_editor_absoluteY="27dp" />
+
+        <ImageView
+            android:id="@+id/icon_loc"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:contentDescription="location"
+            android:src="@drawable/icon_loc"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="157dp" />
+
+        <ImageView
+            android:id="@+id/icon_safe"
+            android:layout_width="109dp"
+            android:layout_height="146dp"
+            android:contentDescription="safe"
+            android:src="@drawable/i_safe"
+            tools:layout_editor_absoluteX="215dp"
+            tools:layout_editor_absoluteY="27dp" />
+
+        <TextView
+            android:id="@+id/safe_loc"
+            style="@style/Text"
+            android:layout_width="150dp"
+            android:layout_height="27dp"
+            android:text="Jakarta Selatan"
+            tools:layout_editor_absoluteX="46dp"
+            tools:layout_editor_absoluteY="157dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
