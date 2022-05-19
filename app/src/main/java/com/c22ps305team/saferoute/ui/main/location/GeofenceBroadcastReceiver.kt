@@ -1,4 +1,4 @@
-package com.c22ps305team.saferoute.ui.main
+package com.c22ps305team.saferoute.ui.main.location
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

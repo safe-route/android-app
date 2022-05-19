@@ -13,20 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-        <activity
-            android:name=".ui.bottomNav.BottomNav"
-            android:exported="false"
-            android:label="@string/title_activity_bottom_nav" />
 
         <receiver
-            android:name=".ui.main.GeofenceBroadcastReceiver"
+            android:name=".ui.main.location.GeofenceBroadcastReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAYmjp_4eP65go9My1mlp4VtmfpF3vHtj4" />
 
+
+        <activity
+            android:name=".ui.main.location.MapsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.auth.register.RegisterActivity"
             android:exported="false" />
