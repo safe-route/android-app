@@ -19,11 +19,28 @@
         <TextView
             android:id="@+id/safe_desc"
             style="@style/Text.Title"
-            android:layout_width="193dp"
-            android:layout_height="95dp"
-            android:text="Kamu Berada di daerah yang aman"
-            tools:layout_editor_absoluteX="7dp"
-            tools:layout_editor_absoluteY="27dp" />
+            android:layout_width="190dp"
+            android:layout_height="90dp"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="Kamu berada di daerah yang aman"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/icon_safe"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/icon_safe"
+            android:layout_width="119dp"
+            android:layout_height="153dp"
+            android:contentDescription="safe"
+            android:src="@drawable/i_safe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="20dp"
+            />
 
         <ImageView
             android:id="@+id/icon_loc"
@@ -31,26 +48,23 @@
             android:layout_height="30dp"
             android:contentDescription="location"
             android:src="@drawable/icon_loc"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="157dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="5dp"
+            />
 
-        <ImageView
-            android:id="@+id/icon_safe"
-            android:layout_width="109dp"
-            android:layout_height="146dp"
-            android:contentDescription="safe"
-            android:src="@drawable/i_safe"
-            tools:layout_editor_absoluteX="215dp"
-            tools:layout_editor_absoluteY="27dp" />
 
         <TextView
             android:id="@+id/safe_loc"
             style="@style/Text"
             android:layout_width="150dp"
-            android:layout_height="27dp"
+            android:layout_height="30dp"
             android:text="Jakarta Selatan"
-            tools:layout_editor_absoluteX="46dp"
-            tools:layout_editor_absoluteY="157dp" />
+
+            app:layout_constraintBottom_toBottomOf="@+id/icon_loc"
+            app:layout_constraintStart_toEndOf="@id/icon_loc"
+            app:layout_constraintTop_toTopOf="@+id/icon_loc" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

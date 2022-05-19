@@ -32,7 +32,7 @@ class ProfileFragment : Fragment() {
 
     private fun setupObserver() {
         profileViewModel.text.observe(viewLifecycleOwner) {
-            binding.textDashboard.text = it
+            //binding.textDashboard.text = it
         }
     }
 

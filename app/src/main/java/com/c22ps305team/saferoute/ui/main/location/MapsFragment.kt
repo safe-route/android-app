@@ -1,20 +1,17 @@
 package com.c22ps305team.saferoute.ui.main.location
 
-import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.FragmentMapsBinding
-import com.c22ps305team.saferoute.utils.lightStatusBar
-import com.c22ps305team.saferoute.utils.setFullScreen
-import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.CircleOptions
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
