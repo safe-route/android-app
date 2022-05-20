@@ -34,6 +34,7 @@
     <style name="Text.Heading1.AreaName">
         <item name="fontFamily">@font/product_sans_bold</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="Text.Heading2.StateDanger">

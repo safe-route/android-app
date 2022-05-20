@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,67 +9,107 @@
     tools:context=".ui.main.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="350dp"
-        android:layout_height="200dp"
-        android:background="@drawable/bg_safe_state"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/safe_desc"
-            style="@style/Text.Title"
-            android:layout_width="190dp"
-            android:layout_height="90dp"
-            android:fontFamily="@font/product_sans_bold"
-            android:text="Kamu berada di daerah yang aman"
-            android:textSize="22sp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bannerArea"
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_safe_state"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/icon_safe"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="5dp"/>
-
-        <ImageView
-            android:id="@+id/icon_safe"
-            android:layout_width="119dp"
-            android:layout_height="153dp"
-            android:contentDescription="safe"
-            android:src="@drawable/i_safe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="30dp">
 
-        <ImageView
-            android:id="@+id/icon_loc"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="location"
-            android:src="@drawable/icon_loc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="5dp"
-            />
+            <TextView
+                android:id="@+id/tvDescArea"
+                style="@style/Text.Title"
+                android:layout_width="190dp"
+                android:layout_height="90dp"
+                android:fontFamily="@font/product_sans_bold"
+                android:text="@string/safe_state_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivSafe"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="20dp"/>
 
+            <ImageView
+                android:id="@+id/ivSafe"
+                android:layout_width="119dp"
+                android:layout_height="153dp"
+                android:contentDescription="@string/safe_state"
+                android:src="@drawable/i_safe"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="20dp"/>
+
+            <ImageView
+                android:id="@+id/iconArea"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/area"
+                android:src="@drawable/icon_loc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="15dp"/>
+
+            <TextView
+                android:id="@+id/tvAreaName"
+                style="@style/Text.Heading1.AreaName"
+                android:layout_width="150dp"
+                android:layout_height="30dp"
+                android:text="@string/jakarta_selatan"
+                app:layout_constraintBottom_toBottomOf="@+id/iconArea"
+                app:layout_constraintStart_toEndOf="@id/iconArea"
+                app:layout_constraintTop_toTopOf="@+id/iconArea" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/safe_loc"
-            style="@style/Text"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
-            android:text="Jakarta Selatan"
+            android:id="@+id/infoArea"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/area_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bannerArea"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            />
 
-            app:layout_constraintBottom_toBottomOf="@+id/icon_loc"
-            app:layout_constraintStart_toEndOf="@id/icon_loc"
-            app:layout_constraintTop_toTopOf="@+id/icon_loc" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvArea"
+            android:layout_width="360dp"
+            android:layout_height="230dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/infoArea"
+            tools:listitem="@layout/area_info" />
+
+        <TextView
+            android:id="@+id/infoTips"
+            style="@style/Text.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/tips_info"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvArea"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+</ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
