@@ -3,24 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2075" />
-        <entry key="app/src/main/res/drawable/bg_safe_state.xml" value="0.202" />
-        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1775" />
-        <entry key="app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1775" />
-        <entry key="app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2075" />
-        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2075" />
-        <entry key="app/src/main/res/font/font.xml" value="0.654296875" />
-        <entry key="app/src/main/res/layout/activity_bottom_nav.xml" value="0.18" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_map_bottom_sheet.xml" value="0.1565" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_safe_state.xml" value="0.1565" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_bottom_nav.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_maps.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/area_info.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_notifications.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/map_bottom_sheet.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.16875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34791666666666665" />
-        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.34791666666666665" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/map_bottom_sheet.xml" value="0.34791666666666665" />
-        <entry key="app/src/main/res/layout/user_journey.xml" value="0.33" />
-        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.34791666666666665" />
       </map>
     </option>
   </component>

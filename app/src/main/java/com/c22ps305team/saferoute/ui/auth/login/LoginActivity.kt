@@ -1,7 +1,7 @@
 package com.c22ps305team.saferoute.ui.auth.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.c22ps305team.saferoute.R
 
 class LoginActivity : AppCompatActivity() {

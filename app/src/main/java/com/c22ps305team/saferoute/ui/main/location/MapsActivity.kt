@@ -8,13 +8,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.c22ps305team.saferoute.R
-import com.c22ps305team.saferoute.databinding.ActivityMainBinding
 import com.c22ps305team.saferoute.databinding.ActivityMapsBinding
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
@@ -79,8 +78,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     private val requestBackgroundLocationPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted: Boolean ->
-            if (isGranted){
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
                 getMyLocation()
             }
         }
@@ -89,7 +88,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     @TargetApi(Build.VERSION_CODES.Q)
     private val requestLocationPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()){ isGranted: Boolean ->
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 if (runningQOrLater) {
                     requestBackgroundLocationPermissionLauncher.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
@@ -110,7 +109,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun checkForegroundAndBackgroundLocationPermission(): Boolean {
         val foregroundLocationApproved = checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
         val backgroundPermissionApproved =
-            if (runningQOrLater){
+            if (runningQOrLater) {
                 checkPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION)
             } else {
                 true
@@ -131,7 +130,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     private fun getMyLocation() {
-        if (checkForegroundAndBackgroundLocationPermission()){
+        if (checkForegroundAndBackgroundLocationPermission()) {
             mMap.isMyLocationEnabled = true
         } else {
             requestLocationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
