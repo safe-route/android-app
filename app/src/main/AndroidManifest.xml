@@ -14,19 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
 
-        <receiver
-            android:name=".ui.main.location.GeofenceBroadcastReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAYmjp_4eP65go9My1mlp4VtmfpF3vHtj4" />
 
-
-        <activity
-            android:name=".ui.main.location.MapsActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.auth.register.RegisterActivity"
             android:exported="false" />
@@ -42,6 +33,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".ui.main.location.GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>

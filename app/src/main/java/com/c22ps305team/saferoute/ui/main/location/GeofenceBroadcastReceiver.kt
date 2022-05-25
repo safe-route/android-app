@@ -30,8 +30,8 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             if (geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER || geofenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
                 val geofenceTransitionString =
                     when (geofenceTransition) {
-                        Geofence.GEOFENCE_TRANSITION_ENTER -> "Anda telah memasuki area"
-                        Geofence.GEOFENCE_TRANSITION_DWELL -> "Anda telah di dalam area"
+                        Geofence.GEOFENCE_TRANSITION_ENTER -> "Anda telah memasuki area berbahaya"
+                        Geofence.GEOFENCE_TRANSITION_DWELL -> "Anda telah di dalam area berbahaya"
                         else -> "Invalid transition type"
                     }
 
@@ -55,7 +55,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val mBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(geofenceTransitionDetails)
-            .setContentText("Anda sudah bisa absen sekarang :)")
+            .setContentText("Berhati-hatilah anda memasuki daerah berbahaya")
             .setSmallIcon(R.drawable.ic_notification_active)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -77,4 +77,5 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         private const val CHANNEL_NAME = "Geofence Channel"
         private const val NOTIFICATION_ID = 1
     }
+
 }
