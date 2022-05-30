@@ -28,6 +28,12 @@
     <string name="retry">Coba Lagi</string>
     <string name="ic_remove">ic_remove</string>
     <string name="title_activity_make_route">MakeRouteActivity</string>
+    <string name="where_you_go">Mau pergi kemana kamu?</string>
+    <string name="ic_map_location">ic_map_location</string>
+    <string name="ic_lcoation_question">ic_lcoation_question</string>
+    <string name="ic_sort">ic_sort</string>
+    <string name="origin_place">Tempat asal</string>
+    <string name="destination_place">Tujuan</string>
 
 
 </resources>

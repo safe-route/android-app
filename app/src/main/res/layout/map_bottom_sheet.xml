@@ -5,7 +5,7 @@
     android:id="@+id/mapSheet"
     android:layout_width="match_parent"
     android:layout_height="550dp"
-    android:background="@drawable/bg_map_bottom_sheet"
+    android:background="@drawable/bg_top_corner"
     app:behavior_hideable="false"
     app:behavior_peekHeight="158dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
