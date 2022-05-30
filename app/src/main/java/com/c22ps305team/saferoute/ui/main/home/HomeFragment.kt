@@ -14,7 +14,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var homeViewModel: HomeViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,7 +36,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        homeViewModel.text.observe(viewLifecycleOwner){
+        homeViewModel.text.observe(viewLifecycleOwner) {
             //binding.textHome.text = it
         }
     }
@@ -40,5 +44,11 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = HomeFragment().apply {
+            arguments = Bundle().apply { }
+        }
     }
 }
