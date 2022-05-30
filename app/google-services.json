@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "352707269538",
+    "firebase_url": "https://safe-route-351803-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "safe-route-351803",
+    "storage_bucket": "safe-route-351803.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352707269538:android:dfdcd3a6d514ce582f58fb",
+        "android_client_info": {
+          "package_name": "com.c22ps305team.saferoute"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352707269538-0sei2gcv5ni2eqcu5cr0n4qv9qftamvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApX_9Aqk9bUAwJd54ei_-_Y253WjzgNU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352707269538-0sei2gcv5ni2eqcu5cr0n4qv9qftamvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
