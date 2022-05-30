@@ -27,6 +27,7 @@
     <string name="notif_info">Opp’s, Maaf internet mu mengalami gangguan</string>
     <string name="retry">Coba Lagi</string>
     <string name="ic_remove">ic_remove</string>
+    <string name="title_activity_make_route">MakeRouteActivity</string>
 
 
 </resources>

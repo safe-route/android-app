@@ -20,6 +20,10 @@
             android:value="AIzaSyAYmjp_4eP65go9My1mlp4VtmfpF3vHtj4" />
 
         <activity
+            android:name=".ui.main.makeRoute.MakeRouteActivity"
+            android:exported="false"
+            android:label="@string/title_activity_make_route" />
+        <activity
             android:name=".ui.auth.register.RegisterActivity"
             android:exported="false" />
         <activity
@@ -39,7 +43,6 @@
             android:name=".ui.main.location.GeofenceBroadcastReceiver"
             android:enabled="true"
             android:exported="true" />
-
     </application>
 
 </manifest>
