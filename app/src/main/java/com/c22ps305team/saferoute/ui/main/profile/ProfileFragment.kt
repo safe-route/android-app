@@ -14,7 +14,11 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var profileViewModel: ProfileViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -39,5 +43,11 @@ class ProfileFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = ProfileFragment().apply {
+            arguments = Bundle().apply { }
+        }
     }
 }

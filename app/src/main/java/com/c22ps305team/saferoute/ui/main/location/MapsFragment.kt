@@ -69,12 +69,21 @@ class MapsFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getBroadcast(requireActivity(), 0, intent, PendingIntent.FLAG_MUTABLE)
         } else {
-            PendingIntent.getBroadcast(requireActivity(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                requireActivity(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
         }
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentMapsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -95,19 +104,22 @@ class MapsFragment : Fragment() {
         mapsViewModel = ViewModelProvider(requireActivity()).get(MapsViewModel::class.java)
     }
 
-
     //Centroids
     private fun markerCentroids() {
         val jsonFileString = readJsonFile(requireContext(), "clustering.json")
-        val centroid: ClusteringDataModel = Gson().fromJson(jsonFileString, ClusteringDataModel::class.java)
+        val centroid: ClusteringDataModel =
+            Gson().fromJson(jsonFileString, ClusteringDataModel::class.java)
         val jakarta = LatLng(-6.2147648, 106.8085002)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
 
         //get data
         for (i in centroid.centroids!!.indices) {
+            val centoidList: ArrayList<Double> = ArrayList()
+
             latitude = centroid.centroids[i]?.latitude!!
             longitude = centroid.centroids[i]?.longitude!!
             range = centroid.centroids[i]?.range!!
+
 
             //marker
             val latLng = LatLng(latitude, longitude)
@@ -258,5 +270,10 @@ class MapsFragment : Fragment() {
         _binding = null
     }
 
+    companion object {
+        fun newInstance() = MapsFragment().apply {
+            arguments = Bundle().apply { }
+        }
+    }
 
 }
