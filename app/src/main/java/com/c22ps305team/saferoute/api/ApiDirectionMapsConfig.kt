@@ -19,7 +19,7 @@ class ApiDirectionMapsConfig {
             val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
             val retrofit =
                 Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/maps/api/directions/json")
+                    .baseUrl("https://maps.googleapis.com/maps/api/directions/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
