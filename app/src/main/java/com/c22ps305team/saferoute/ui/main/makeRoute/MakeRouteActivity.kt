@@ -1,25 +1,25 @@
 package com.c22ps305team.saferoute.ui.main.makeRoute
 
-import android.app.Activity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.ActivityMakeRouteBinding
 import com.c22ps305team.saferoute.utils.hideKeyboard
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+
 
 class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -37,6 +37,22 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        setupBottomSheetBehavior()
+    }
+
+    // Map Callback
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        mMap.uiSettings.isMyLocationButtonEnabled = false
+
+        val jakarta = LatLng(-6.229728, 106.6894283)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
+
+        getMyLocation()
+    }
+
+    // Bottom Sheet Behavior
+    private fun setupBottomSheetBehavior() {
         val bottomSheetMakeRoute = findViewById<ConstraintLayout>(R.id.bottomSheetMakeRoute)
         val edtOriginPlace = findViewById<EditText>(R.id.edtOriginPlace)
         val btnSelectViaMap = findViewById<AppCompatButton>(R.id.btnSelectViaMap)
@@ -50,8 +66,6 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         btnSelectViaMap.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
-
-
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetMakeRoute)
         bottomSheetBehavior.addBottomSheetCallback(object :
@@ -74,15 +88,21 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         })
-
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    // Get user location
+    private fun getMyLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        mMap.isMyLocationEnabled = true
     }
 
 }
