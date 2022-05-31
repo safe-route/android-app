@@ -4,8 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_circle_radius.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_input.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_map_bottom_sheet.xml" value="0.1565" />
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_safe_state.xml" value="0.1565" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_select_map.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_select_map_active.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/btn_select_map_state.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_arrow_left.xml" value="0.153" />
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_home.xml" value="0.153" />
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
         <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_line.xml" value="0.153" />

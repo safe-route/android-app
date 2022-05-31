@@ -15,7 +15,7 @@
     <!--  Heading  -->
     <style name="Text.Heading1">
         <item name="fontFamily">@font/product_sans_regular</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:textSize">20sp</item>
     </style>
 
@@ -40,6 +40,12 @@
     <style name="Text.Heading2.StateDanger">
         <item name="fontFamily">@font/product_sans_regular</item>
         <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
     </style>
 
 </resources>

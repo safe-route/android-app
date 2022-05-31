@@ -34,6 +34,7 @@
     <string name="ic_sort">ic_sort</string>
     <string name="origin_place">Tempat asal</string>
     <string name="destination_place">Tujuan</string>
+    <string name="select_via_map">Pilih lewat map</string>
 
 
 </resources>
