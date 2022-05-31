@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("json")
+    @GET("directions/json")
     fun getDirection(
         @Query("origin") origin: String,
         @Query("destination") destination: String,
