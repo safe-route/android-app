@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiDirectionMapsConfig {
+class ApiMapsConfig {
 
     companion object {
         fun getApiService(): ApiService {
@@ -19,7 +19,7 @@ class ApiDirectionMapsConfig {
             val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
             val retrofit =
                 Retrofit.Builder()
-                    .baseUrl("https://maps.googleapis.com/maps/api/directions/")
+                    .baseUrl("https://maps.googleapis.com/maps/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
