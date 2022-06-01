@@ -20,17 +20,19 @@
         android:layout_marginEnd="24dp">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/btnBackToHome"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentStart="true"
-            android:background="@drawable/bg_circle_radius"
+            android:background="@drawable/btn_toolbar_state"
             app:navigationIcon="@drawable/ic_arrow_left" />
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/btnGetMyLocation"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/bg_circle_radius"
+            android:background="@drawable/btn_toolbar_state"
             app:navigationIcon="@drawable/ic_current_location" />
 
 
@@ -38,11 +40,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:layout_gravity="bottom"
         android:background="@drawable/bg_top_corner"
         android:backgroundTint="@color/primary">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/be_alert"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/make_route_bottom_sheet" />
