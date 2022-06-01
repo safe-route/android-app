@@ -35,6 +35,7 @@
     <string name="origin_place">Tempat asal</string>
     <string name="destination_place">Tujuan</string>
     <string name="select_via_map">Pilih lewat map</string>
+    <string name="be_alert">Selalu waspada ketika bepergian</string>
 
 
 </resources>

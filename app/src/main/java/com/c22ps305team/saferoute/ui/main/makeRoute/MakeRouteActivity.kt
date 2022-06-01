@@ -3,16 +3,21 @@ package com.c22ps305team.saferoute.ui.main.makeRoute
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.ActivityMakeRouteBinding
 import com.c22ps305team.saferoute.utils.hideKeyboard
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,6 +31,8 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMakeRouteBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var userCurrentLocation: LatLng
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +45,8 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         setupBottomSheetBehavior()
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     // Map Callback
@@ -46,9 +55,13 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isMyLocationButtonEnabled = false
 
         val jakarta = LatLng(-6.229728, 106.6894283)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 10f))
 
-        getMyLocation()
+        binding.btnGetMyLocation.setOnClickListener {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocation, 17F))
+        }
+
+        getMyLocation(mMap)
     }
 
     // Bottom Sheet Behavior
@@ -91,18 +104,61 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Get user location
-    private fun getMyLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
+    private fun getMyLocation(googleMap: GoogleMap) {
+        mMap = googleMap
         mMap.isMyLocationEnabled = true
+
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    userCurrentLocation = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocation, 18F))
+                } else {
+                    Toast.makeText(
+                        this@MakeRouteActivity,
+                        "Location is not found. Try Again",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        } else {
+            requestPermission.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+
+    }
+
+    // Request Permission
+    private val requestPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permission ->
+        when {
+            permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                // Precise location access granted.
+//                getMyLocation()
+            }
+            permission[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                // Only approximate location access granted.
+//                getMyLocation()
+            }
+            else -> {
+                Toast.makeText(this, "Maaf kamu tidak memberikan izin", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    // Check Permission
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
 }
