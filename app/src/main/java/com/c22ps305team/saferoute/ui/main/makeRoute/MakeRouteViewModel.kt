@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.c22ps305team.saferoute.api.ApiDirectionMapsConfig
+import com.c22ps305team.saferoute.api.ApiMapsConfig
 import com.c22ps305team.saferoute.data.DirectionsResponse
+import com.c22ps305team.saferoute.data.ResultsItem
+import com.c22ps305team.saferoute.data.SearchPlaceResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,11 +20,18 @@ class MakeRouteViewModel : ViewModel() {
     private val _geocodeWaypoint = MutableLiveData<DirectionsResponse>()
     val gecodeWaypoint: LiveData<DirectionsResponse> = _geocodeWaypoint
 
+    private val _resultPlace = MutableLiveData<SearchPlaceResponse>()
+    val resultPlace: LiveData<SearchPlaceResponse> = _resultPlace
+
+    private val _listPlace = MutableLiveData<List<ResultsItem?>>()
+    val listPlace: LiveData<List<ResultsItem?>> = _listPlace
+
+    // Get Direction
     fun getDirection(direction: String, destination: String, apiKey: String) {
         _isLoading.value = true
 
         val client =
-            ApiDirectionMapsConfig.getApiService().getDirection(direction, destination, apiKey)
+            ApiMapsConfig.getApiService().getDirection(direction, destination, apiKey)
         client.enqueue(object : Callback<DirectionsResponse> {
             override fun onResponse(
                 call: Call<DirectionsResponse>,
@@ -40,6 +49,29 @@ class MakeRouteViewModel : ViewModel() {
 
         })
 
+    }
+
+    // Search Place
+    fun searchPlace(query: String, apiKey: String) {
+        _isLoading.value = true
+
+        val client = ApiMapsConfig.getApiService().searchPlace(query, apiKey)
+        client.enqueue(object : Callback<SearchPlaceResponse> {
+            override fun onResponse(
+                call: Call<SearchPlaceResponse>,
+                response: Response<SearchPlaceResponse>
+            ) {
+                _isLoading.value = false
+                if (response.isSuccessful && response.body() != null) {
+                    _listPlace.value = response.body()?.results!!
+                }
+            }
+
+            override fun onFailure(call: Call<SearchPlaceResponse>, t: Throwable) {
+                Log.e("Error Gan: ", "onFailure: ${t.message}")
+            }
+
+        })
     }
 
 
