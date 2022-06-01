@@ -44,8 +44,11 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        setupBottomSheetBehavior()
+        binding.btnBackToHome.setOnClickListener {
+            onBackPressed()
+        }
 
+        setupBottomSheetBehavior()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
