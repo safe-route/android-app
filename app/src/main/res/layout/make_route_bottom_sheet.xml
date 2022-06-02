@@ -51,6 +51,7 @@
             android:drawableStart="@drawable/ic_map_location"
             android:drawablePadding="10dp"
             android:hint="@string/origin_place"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -89,6 +90,7 @@
             android:drawableStart="@drawable/ic_location_question"
             android:drawablePadding="10dp"
             android:hint="@string/destination_place"
+            android:inputType="text"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -110,6 +112,23 @@
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPickCurrentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/btn_select_map_state"
+        android:drawableLeft="@drawable/ic_current_location"
+        android:drawablePadding="5dp"
+        android:padding="9dp"
+        android:text="@string/pick_current_location"
+        android:textAllCaps="false"
+        android:textColor="@color/grey"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSelectViaMap"
+        app:layout_constraintStart_toEndOf="@+id/btnSelectViaMap"
+        app:layout_constraintTop_toTopOf="@+id/btnSelectViaMap" />
+
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
@@ -119,6 +138,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSelectViaMap" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimerFrameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/shimer_placeholder" />
+
+            <include layout="@layout/shimer_placeholder" />
+
+            <include layout="@layout/shimer_placeholder" />
+
+            <include layout="@layout/shimer_placeholder" />
+
+            <include layout="@layout/shimer_placeholder" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListPlace"

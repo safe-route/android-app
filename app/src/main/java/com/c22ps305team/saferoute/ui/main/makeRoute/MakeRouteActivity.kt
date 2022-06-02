@@ -3,6 +3,7 @@ package com.c22ps305team.saferoute.ui.main.makeRoute
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.view.View
@@ -23,6 +24,7 @@ import com.c22ps305team.saferoute.adapter.ListPlaceAdapter
 import com.c22ps305team.saferoute.data.ResultsItem
 import com.c22ps305team.saferoute.databinding.ActivityMakeRouteBinding
 import com.c22ps305team.saferoute.utils.hideKeyboard
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -36,6 +38,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var geocoder: Geocoder
     private lateinit var binding: ActivityMakeRouteBinding
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -63,8 +66,11 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             setResultPlaceData(place)
         }
 
-
+        makeRouteViewModel.isLoading.observe(this) { loading ->
+            showLoading(loading)
+        }
     }
+
 
     // Map Callback
     override fun onMapReady(googleMap: GoogleMap) {
@@ -78,7 +84,7 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocation, 17F))
         }
 
-        getMyLocation(mMap)
+        getMyLocation()
     }
 
     // Bottom Sheet Behavior
@@ -87,10 +93,14 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         val edtOriginPlace = findViewById<EditText>(R.id.edtOriginPlace)
         val edtDestinationPlace = findViewById<EditText>(R.id.edtDestinationPlace)
         val btnSelectViaMap = findViewById<AppCompatButton>(R.id.btnSelectViaMap)
+        val btnPickCurrentLocation = findViewById<AppCompatButton>(R.id.btnPickCurrentLocation)
 
         edtOriginPlace.setOnFocusChangeListener { view, b ->
             if (view.isFocused) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                btnPickCurrentLocation.visibility = View.VISIBLE
+            } else {
+                btnPickCurrentLocation.visibility = View.GONE
             }
         }
 
@@ -100,6 +110,17 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
         btnSelectViaMap.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        btnPickCurrentLocation.setOnClickListener {
+            geocoder = Geocoder(this)
+            val address = geocoder.getFromLocation(
+                userCurrentLocation.latitude,
+                userCurrentLocation.longitude,
+                1
+            )
+            val streetName = address[0].getAddressLine(0).split(",")
+            edtOriginPlace.setText(streetName[0])
         }
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetMakeRoute)
@@ -126,8 +147,7 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     // Get user location
-    private fun getMyLocation(googleMap: GoogleMap) {
-        mMap = googleMap
+    private fun getMyLocation() {
         mMap.isMyLocationEnabled = true
 
         if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
@@ -163,11 +183,11 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         when {
             permission[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
                 // Precise location access granted.
-//                getMyLocation()
+                getMyLocation()
             }
             permission[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
                 // Only approximate location access granted.
-//                getMyLocation()
+                getMyLocation()
             }
             else -> {
                 Toast.makeText(this, "Maaf kamu tidak memberikan izin", Toast.LENGTH_LONG).show()
@@ -196,6 +216,35 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         val adapter = ListPlaceAdapter(listPlace)
         rvListPlace.adapter = adapter
 
+    }
+
+    // Handle loading state
+    private fun showLoading(loading: Boolean) {
+        val shimerFrameLayout = findViewById<ShimmerFrameLayout>(R.id.shimerFrameLayout)
+        val rvListPlace = findViewById<RecyclerView>(R.id.rvListPlace)
+        if (!loading) {
+            shimerFrameLayout.stopShimmer()
+            shimerFrameLayout.visibility = View.GONE
+            rvListPlace.visibility = View.VISIBLE
+        } else {
+            shimerFrameLayout.visibility = View.VISIBLE
+            shimerFrameLayout.startShimmer()
+            rvListPlace.visibility = View.GONE
+        }
+    }
+
+    override fun onResume() {
+        val shimerFrameLayout = findViewById<ShimmerFrameLayout>(R.id.shimerFrameLayout)
+        super.onResume()
+
+        shimerFrameLayout.stopShimmer()
+    }
+
+    override fun onPause() {
+        val shimerFrameLayout = findViewById<ShimmerFrameLayout>(R.id.shimerFrameLayout)
+        super.onPause()
+
+        shimerFrameLayout.stopShimmer()
     }
 
 }
