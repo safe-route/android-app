@@ -38,6 +38,7 @@
     <string name="be_alert">Selalu waspada ketika bepergian</string>
     <string name="place_name">Central Park</string>
     <string name="place_detail">Jl. Samberembe, Bulus II, Pakem, Jakarta, Indonesia</string>
+    <string name="pick_current_location">Pilih lokasi saat ini</string>
 
 
 </resources>
