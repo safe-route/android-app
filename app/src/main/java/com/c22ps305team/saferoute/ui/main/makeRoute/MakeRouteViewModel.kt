@@ -27,11 +27,11 @@ class MakeRouteViewModel : ViewModel() {
     val listPlace: LiveData<List<ResultsItem?>> = _listPlace
 
     // Get Direction
-    fun getDirection(direction: String, destination: String, apiKey: String) {
+    fun getDirection(origin: String, destination: String, apiKey: String) {
         _isLoading.value = true
 
         val client =
-            ApiMapsConfig.getApiService().getDirection(direction, destination, apiKey)
+            ApiMapsConfig.getApiService().getDirection(origin, destination, apiKey)
         client.enqueue(object : Callback<DirectionsResponse> {
             override fun onResponse(
                 call: Call<DirectionsResponse>,

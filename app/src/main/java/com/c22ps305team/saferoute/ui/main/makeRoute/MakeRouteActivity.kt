@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.BuildConfig
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.adapter.ListPlaceAdapter
+import com.c22ps305team.saferoute.data.DirectionsResponse
 import com.c22ps305team.saferoute.data.ResultsItem
 import com.c22ps305team.saferoute.databinding.ActivityMakeRouteBinding
 import com.c22ps305team.saferoute.utils.hideKeyboard
@@ -32,7 +33,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.maps.android.PolyUtil
 
 
 class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -69,6 +72,20 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         makeRouteViewModel.isLoading.observe(this) { loading ->
             showLoading(loading)
         }
+
+        makeRouteViewModel.gecodeWaypoint.observe(this) { geoCodeWayPoint ->
+            setRoute(geoCodeWayPoint)
+        }
+    }
+
+    private fun setRoute(geoCodeWayPoint: DirectionsResponse?) {
+        val bottomSheetMakeRoute = findViewById<ConstraintLayout>(R.id.bottomSheetMakeRoute)
+        bottomSheetMakeRoute.visibility = View.GONE
+
+        val polyLine = geoCodeWayPoint?.routes?.get(0)?.overviewPolyline?.points
+        val routeDecode = PolyUtil.decode(polyLine)
+
+        mMap.addPolyline(PolylineOptions().addAll(routeDecode).color(Color.RED))
     }
 
 
@@ -213,9 +230,19 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         rvListPlace.layoutManager = LinearLayoutManager(this)
-        val adapter = ListPlaceAdapter(listPlace)
+        val adapter = ListPlaceAdapter(listPlace) {
+            makeRoute(it)
+        }
         rvListPlace.adapter = adapter
 
+    }
+
+    // Make routing
+    private fun makeRoute(listPlace: List<ResultsItem>) {
+        val geoMetry = listPlace[0].geometry
+        val destinationPlace = "${geoMetry?.location?.lat},${geoMetry?.location?.lng}"
+        val originPlace = "${userCurrentLocation.latitude}, ${userCurrentLocation.longitude}"
+        makeRouteViewModel.getDirection(originPlace, destinationPlace, BuildConfig.API_KEY)
     }
 
     // Handle loading state
@@ -232,6 +259,7 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             rvListPlace.visibility = View.GONE
         }
     }
+
 
     override fun onResume() {
         val shimerFrameLayout = findViewById<ShimmerFrameLayout>(R.id.shimerFrameLayout)
