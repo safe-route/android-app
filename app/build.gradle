@@ -82,4 +82,7 @@ dependencies {
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.2'
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
+
+
 }
