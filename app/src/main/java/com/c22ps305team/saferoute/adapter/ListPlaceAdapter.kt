@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.data.ResultsItem
 import com.c22ps305team.saferoute.databinding.ItemPlaceBinding
 
-class ListPlaceAdapter(private val listPlace: List<ResultsItem>) :
+class ListPlaceAdapter(
+    private val listPlace: List<ResultsItem>,
+    val itemClick: (List<ResultsItem>) -> Unit
+) :
     RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListPlaceAdapter.ViewHolder {
@@ -18,6 +21,9 @@ class ListPlaceAdapter(private val listPlace: List<ResultsItem>) :
     override fun onBindViewHolder(holder: ListPlaceAdapter.ViewHolder, position: Int) {
         holder.binding.tvPlaceName.text = listPlace[position].name
         holder.binding.tvPlaceDetail.text = listPlace[position].formattedAddress
+        holder.itemView.setOnClickListener {
+            itemClick(listPlace)
+        }
     }
 
     override fun getItemCount(): Int = listPlace.size
