@@ -9,11 +9,18 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.c22ps305team.saferoute.BuildConfig
 import com.c22ps305team.saferoute.R
+import com.c22ps305team.saferoute.adapter.ListPlaceAdapter
+import com.c22ps305team.saferoute.data.ResultsItem
 import com.c22ps305team.saferoute.databinding.ActivityMakeRouteBinding
 import com.c22ps305team.saferoute.utils.hideKeyboard
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -33,6 +40,7 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var userCurrentLocation: LatLng
+    private val makeRouteViewModel by viewModels<MakeRouteViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +58,12 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setupBottomSheetBehavior()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        makeRouteViewModel.listPlace.observe(this) { place ->
+            setResultPlaceData(place)
+        }
+
+
     }
 
     // Map Callback
@@ -71,12 +85,17 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun setupBottomSheetBehavior() {
         val bottomSheetMakeRoute = findViewById<ConstraintLayout>(R.id.bottomSheetMakeRoute)
         val edtOriginPlace = findViewById<EditText>(R.id.edtOriginPlace)
+        val edtDestinationPlace = findViewById<EditText>(R.id.edtDestinationPlace)
         val btnSelectViaMap = findViewById<AppCompatButton>(R.id.btnSelectViaMap)
 
         edtOriginPlace.setOnFocusChangeListener { view, b ->
             if (view.isFocused) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             }
+        }
+
+        edtDestinationPlace.addTextChangedListener { query ->
+            makeRouteViewModel.searchPlace(query.toString(), BuildConfig.API_KEY)
         }
 
         btnSelectViaMap.setOnClickListener {
@@ -100,7 +119,7 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                // Do somthing when bottom sheet on slide state
             }
 
         })
@@ -162,6 +181,21 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             this,
             permission
         ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    // Set result place data
+    private fun setResultPlaceData(placeResult: List<ResultsItem?>) {
+        val listPlace = ArrayList<ResultsItem>()
+        val rvListPlace = findViewById<RecyclerView>(R.id.rvListPlace)
+
+        for (place in placeResult) {
+            listPlace.add(place!!)
+        }
+
+        rvListPlace.layoutManager = LinearLayoutManager(this)
+        val adapter = ListPlaceAdapter(listPlace)
+        rvListPlace.adapter = adapter
+
     }
 
 }
