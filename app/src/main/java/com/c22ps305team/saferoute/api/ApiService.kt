@@ -18,6 +18,7 @@ interface ApiService {
     @GET("place/textsearch/json")
     fun searchPlace(
         @Query("query") query: String,
+        @Query("language") language: String,
         @Query("key") key: String
     ): Call<SearchPlaceResponse>
 
