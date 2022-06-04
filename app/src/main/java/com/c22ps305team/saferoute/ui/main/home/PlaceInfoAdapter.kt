@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.AreaInfoBinding
 
+
 class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
     RecyclerView.Adapter<PlaceInfoAdapter.PlaceInfoViewHolder>() {
 
@@ -41,8 +42,12 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
         fun bind(listStatistic: Statistic){
             binding.apply {
                 tvAreaName.text = listStatistic.subdistrict
-                tvStatePercentage.text = listStatistic.totalCrime.toString()
-                Log.e("list data", listStatistic.toString())
+                tvStatePercentage.text = listStatistic.total_crime.toString()
+
+                /*val theft = listStatistic.crime_info.["Theft"] ?: ""
+                tvCurrentInfo.text = "Theft: " +theft*/
+
+                //Log.e("list data", listStatistic.toString())
             }
             binding.root.setOnClickListener {
                 onItemClickCallback.onItemClicked(listStatistic)
