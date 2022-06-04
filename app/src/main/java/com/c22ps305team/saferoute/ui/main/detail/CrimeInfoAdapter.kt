@@ -28,7 +28,7 @@ class CrimeInfoAdapter(private val crimeInfoList: MutableMap<String, Int>) : Rec
             binding.apply {
                 tvAreaName.text = key
                 tvStatePercentage.text = value
-                //Log.e("bind ", crimeInfo )
+                //Log.e("bind ", key )
             }
         }
     }

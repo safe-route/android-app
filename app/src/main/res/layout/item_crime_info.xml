@@ -19,6 +19,20 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
+        <!--<TextView
+            android:id="@+id/tvNo"
+            style="@style/Text.Heading1.AreaName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textStyle="bold"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />-->
+
+
         <TextView
             android:id="@+id/tvAreaName"
             style="@style/Text.Heading1.AreaName"
@@ -27,6 +41,7 @@
             android:text="@string/jakarta_selatan"
             android:textStyle="bold"
             android:textAlignment="textStart"
+            android:layout_marginLeft="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
