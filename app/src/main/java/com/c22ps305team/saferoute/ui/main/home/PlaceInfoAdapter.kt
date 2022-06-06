@@ -1,32 +1,23 @@
 package com.c22ps305team.saferoute.ui.main.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.data.Statistic
-import com.c22ps305team.saferoute.databinding.AreaInfoBinding
+import com.c22ps305team.saferoute.databinding.ItemAreaInfoBinding
+
 
 class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
     RecyclerView.Adapter<PlaceInfoAdapter.PlaceInfoViewHolder>() {
 
-
     private lateinit var onItemClickCallback: OnItemClickCallback
-
-
-    /*fun setData(list: List<Statistic>){
-        listPlaceInfo.clear()
-        listPlaceInfo.addAll(list)
-        notifyDataSetChanged()
-    }*/
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
         this.onItemClickCallback = onItemClickCallback
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceInfoViewHolder {
-        val binding = AreaInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemAreaInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlaceInfoViewHolder(binding)
     }
 
@@ -37,12 +28,16 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
     override fun getItemCount() = listPlaceInfo.size
 
 
-    inner class PlaceInfoViewHolder(var binding: AreaInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PlaceInfoViewHolder(var binding: ItemAreaInfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(listStatistic: Statistic){
             binding.apply {
                 tvAreaName.text = listStatistic.subdistrict
-                tvStatePercentage.text = listStatistic.totalCrime.toString()
-                Log.e("list data", listStatistic.toString())
+                tvStatePercentage.text = listStatistic.total_crime.toString()
+
+                /*val theft = listStatistic.crime_info.["Theft"] ?: ""
+                tvCurrentInfo.text = "Theft: " +theft*/
+
+                //Log.e("list data", listStatistic.toString())
             }
             binding.root.setOnClickListener {
                 onItemClickCallback.onItemClicked(listStatistic)

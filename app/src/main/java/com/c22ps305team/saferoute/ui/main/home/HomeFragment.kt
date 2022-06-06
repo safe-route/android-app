@@ -1,5 +1,6 @@
 package com.c22ps305team.saferoute.ui.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.FragmentHomeBinding
+import com.c22ps305team.saferoute.ui.main.detail.DetailPlaceActivity
 import com.google.firebase.firestore.*
 
 class HomeFragment : Fragment() {
@@ -49,7 +51,15 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
         }
 
-        //Klik = placeInfoAdapter.setOnItemClickCallback()
+        //Klik
+        placeInfoAdapter.setOnItemClickCallback(object: PlaceInfoAdapter.OnItemClickCallback{
+            override fun onItemClicked(statistic: Statistic) {
+                val intent = Intent(requireContext(), DetailPlaceActivity::class.java)
+                intent.putExtra(DetailPlaceActivity.EXTRA_STATS, statistic)
+                //Log.e("onItemClicked: ", statistic.crime_info.toString())
+                startActivity(intent)
+            }
+        })
 
         //setData
         //placeInfoAdapter.setData(placeInfoData)
@@ -69,6 +79,7 @@ class HomeFragment : Fragment() {
                 for (dc: DocumentChange in value?.documentChanges!!){
                     if (dc.type == DocumentChange.Type.ADDED){
                         placeInfoData.add(dc.document.toObject(Statistic::class.java))
+                        //Log.e("get data", value.toString())
                     }
                 }
                 placeInfoAdapter.notifyDataSetChanged()

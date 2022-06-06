@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -86,5 +87,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.2'
     implementation 'com.google.firebase:firebase-firestore:21.4.0'
 
+
+    //Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
 }
