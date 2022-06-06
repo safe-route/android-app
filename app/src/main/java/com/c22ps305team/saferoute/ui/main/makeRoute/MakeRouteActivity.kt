@@ -54,6 +54,8 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMakeRouteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -61,10 +63,12 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.btnBackToHome.setOnClickListener {
             onBackPressed()
         }
-
         setupBottomSheetBehavior()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        observeViewModel()
+    }
 
+    // Observe Viewmodel
+    private fun observeViewModel() {
         makeRouteViewModel.listPlace.observe(this) { place ->
             setResultPlaceData(place)
         }
@@ -78,16 +82,15 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    // Draw route to map
     private fun setRoute(geoCodeWayPoint: DirectionsResponse?) {
-        val bottomSheetMakeRoute = findViewById<ConstraintLayout>(R.id.bottomSheetMakeRoute)
-        bottomSheetMakeRoute.visibility = View.GONE
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         val polyLine = geoCodeWayPoint?.routes?.get(0)?.overviewPolyline?.points
         val routeDecode = PolyUtil.decode(polyLine)
 
-        mMap.addPolyline(PolylineOptions().addAll(routeDecode).color(Color.RED))
+        mMap.addPolyline(PolylineOptions().addAll(routeDecode).color(Color.GREEN).width(15F))
     }
-
 
     // Map Callback
     override fun onMapReady(googleMap: GoogleMap) {
@@ -259,7 +262,6 @@ class MakeRouteActivity : AppCompatActivity(), OnMapReadyCallback {
             rvListPlace.visibility = View.GONE
         }
     }
-
 
     override fun onResume() {
         val shimerFrameLayout = findViewById<ShimmerFrameLayout>(R.id.shimerFrameLayout)
