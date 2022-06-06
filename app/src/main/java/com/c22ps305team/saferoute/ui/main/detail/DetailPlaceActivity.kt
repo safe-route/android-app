@@ -1,8 +1,8 @@
 package com.c22ps305team.saferoute.ui.main.detail
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.ActivityDetailPlaceBinding
@@ -12,7 +12,6 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import java.util.ArrayList
 
 class DetailPlaceActivity : AppCompatActivity() {
 

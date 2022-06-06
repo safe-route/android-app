@@ -36,6 +36,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 
 
@@ -55,8 +56,8 @@ class MapsFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         mMap = googleMap
-        mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMyLocationButtonEnabled = false
 
         markerCentroids()
     }
@@ -96,6 +97,14 @@ class MapsFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
+        binding.btnFilterMap.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val filterBottomSheet = layoutInflater.inflate(R.layout.filter_map_bottom_sheet, null)
+
+            dialog.setContentView(filterBottomSheet)
+            dialog.show()
+        }
+
         setupViewModel()
     }
 
@@ -114,7 +123,6 @@ class MapsFragment : Fragment() {
 
         //get data
         for (i in centroid.centroids!!.indices) {
-            val centoidList: ArrayList<Double> = ArrayList()
 
             latitude = centroid.centroids[i]?.latitude!!
             longitude = centroid.centroids[i]?.longitude!!
