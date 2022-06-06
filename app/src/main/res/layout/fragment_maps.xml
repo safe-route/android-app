@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mapsFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.location.MapsFragment">
+
 
     <fragment
         android:id="@+id/mapFragment"
@@ -12,6 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <include layout="@layout/map_bottom_sheet" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/btnBackToHome"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/btn_toolbar_state"
+        app:navigationIcon="@drawable/ic_stack" />
+
+    <include
+        android:id="@+id/mapBottomSheet"
+        layout="@layout/map_bottom_sheet" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
