@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:layout_marginLeft="8dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     android:layout_marginRight="8dp"
     android:layout_marginBottom="4dp"
     app:cardCornerRadius="4dp">
@@ -18,20 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
-
-        <!--<TextView
-            android:id="@+id/tvNo"
-            style="@style/Text.Heading1.AreaName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textStyle="bold"
-            android:textAlignment="textStart"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />-->
-
 
         <TextView
             android:id="@+id/tvAreaName"

@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.ActivityMainBinding
+import com.c22ps305team.saferoute.ui.main.detail.CrimeInfoAdapter
 import com.c22ps305team.saferoute.ui.main.home.HomeFragment
 import com.c22ps305team.saferoute.ui.main.location.MapsFragment
 import com.c22ps305team.saferoute.ui.main.makeRoute.MakeRouteActivity
 import com.c22ps305team.saferoute.ui.main.profile.ProfileFragment
+import com.c22ps305team.saferoute.ui.main.reportCrime.CrimeReportFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navigation_home -> replaceFragment(HomeFragment.newInstance())
                 R.id.navigation_maps -> replaceFragment(MapsFragment.newInstance())
+                R.id.navigation_report -> replaceFragment(CrimeReportFragment.newInstance())
                 R.id.navigation_profile -> replaceFragment(ProfileFragment.newInstance())
             }
             return@setOnItemSelectedListener true

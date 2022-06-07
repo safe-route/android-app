@@ -1,6 +1,7 @@
 package com.c22ps305team.saferoute.ui.main.home
 
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.FragmentHomeBinding
 import com.c22ps305team.saferoute.ui.main.detail.DetailPlaceActivity
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.firebase.firestore.*
 
 class HomeFragment : Fragment() {
@@ -24,6 +26,9 @@ class HomeFragment : Fragment() {
     private lateinit var placeInfoAdapter: PlaceInfoAdapter
     private lateinit var db: FirebaseFirestore
 
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val location: Location? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -39,6 +44,13 @@ class HomeFragment : Fragment() {
         setupObserver()*/
         setupPlaceInfo()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 
     private fun setupPlaceInfo() {
 
@@ -100,10 +112,7 @@ class HomeFragment : Fragment() {
         }
     }*/
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     companion object {
         fun newInstance() = HomeFragment().apply {
