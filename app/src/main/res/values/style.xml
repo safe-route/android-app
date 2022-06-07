@@ -51,13 +51,15 @@
 
     <!-- RecyclerView Item   -->
     <style name="PlaceName">
-        <item name="android:textSize">17sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/product_sans_regular</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="PlaceDetail">
         <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/product_sans_regular</item>
         <item name="android:textColor">@color/grey</item>
     </style>
 

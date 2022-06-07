@@ -21,10 +21,10 @@
 
         <TextView
             android:id="@+id/tvAreaName"
-            style="@style/Text.Heading1.AreaName"
+            style="@style/PlaceName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/jakarta_selatan"
+            tools:text="@string/jakarta_selatan"
             android:textStyle="bold"
             android:textAlignment="textStart"
             app:layout_constraintStart_toStartOf="parent"

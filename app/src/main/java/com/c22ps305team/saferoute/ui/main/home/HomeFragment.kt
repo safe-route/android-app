@@ -1,19 +1,27 @@
 package com.c22ps305team.saferoute.ui.main.home
 
 import android.content.Intent
-import android.location.Location
+import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.FragmentHomeBinding
 import com.c22ps305team.saferoute.ui.main.detail.DetailPlaceActivity
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
@@ -28,7 +36,6 @@ class HomeFragment : Fragment() {
 
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val location: Location? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -40,8 +47,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+
         /*setupViewModel()
         setupObserver()*/
+        getCurrentLocation()
         setupPlaceInfo()
     }
 
@@ -51,9 +62,45 @@ class HomeFragment : Fragment() {
     }
 
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ){ isGranted ->
+            if (isGranted){
+                getCurrentLocation()
+            }
+        }
+
+
+    private fun getCurrentLocation(){
+        if (ContextCompat.checkSelfPermission(requireContext(),  android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED){
+            fusedLocationClient.lastLocation.addOnSuccessListener { currentLocation ->
+                if (currentLocation != null){
+                    val lat = currentLocation.latitude
+                    val long = currentLocation.longitude
+                    getCityName(lat, long)
+                } else {
+                    Toast.makeText(requireContext(), "Nyalakan location!!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+    }
+
+
+    private fun getCityName(lat: Double, long: Double) {
+        var geoCoder = Geocoder(requireContext().applicationContext, Locale.getDefault())
+        var address = geoCoder.getFromLocation(lat, long, 1)
+        val cityName: String = address.get(0).locality
+
+        binding.tvAreaName.text = cityName
+        Log.e("getCityName: ", cityName)
+    }
+
 
     private fun setupPlaceInfo() {
-
         placeInfoData = arrayListOf()
         placeInfoAdapter = PlaceInfoAdapter(placeInfoData)
 
@@ -80,6 +127,7 @@ class HomeFragment : Fragment() {
 
     }
 
+
     private fun eventChangeListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("statistic").addSnapshotListener(object : EventListener<QuerySnapshot>{
@@ -96,9 +144,7 @@ class HomeFragment : Fragment() {
                 }
                 placeInfoAdapter.notifyDataSetChanged()
             }
-
         })
-
     }
 
 
@@ -119,4 +165,5 @@ class HomeFragment : Fragment() {
             arguments = Bundle().apply { }
         }
     }
+
 }
