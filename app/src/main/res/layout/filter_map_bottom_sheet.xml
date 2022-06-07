@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/filterBsContainer"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_top_corner"
@@ -16,8 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvFilterTitle" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <FrameLayout
+        android:id="@+id/selectCentroid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -26,7 +26,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvFilterTitle">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -37,24 +36,24 @@
             app:cardPreventCornerOverlap="true">
 
             <ImageView
+                android:id="@+id/ivSelectCentroid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_menu_centroid" />
 
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+    </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
+    <FrameLayout
+        android:id="@+id/selectArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintBottom_toBottomOf="@+id/selectCentroid"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout3">
+        app:layout_constraintTop_toTopOf="@+id/selectCentroid">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="10dp"
@@ -65,12 +64,13 @@
             app:cardPreventCornerOverlap="true">
 
             <ImageView
+                android:id="@+id/ivSelectArea"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_menu_tiling" />
 
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tvFilterTitle"
@@ -92,9 +92,9 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+        app:layout_constraintEnd_toEndOf="@+id/selectCentroid"
+        app:layout_constraintStart_toStartOf="@+id/selectCentroid"
+        app:layout_constraintTop_toBottomOf="@+id/selectCentroid" />
 
     <TextView
         android:id="@+id/tvDistrictsInfo"
@@ -105,8 +105,8 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout4"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintEnd_toEndOf="@+id/selectArea"
+        app:layout_constraintStart_toStartOf="@+id/selectArea"
+        app:layout_constraintTop_toBottomOf="@+id/selectArea" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
