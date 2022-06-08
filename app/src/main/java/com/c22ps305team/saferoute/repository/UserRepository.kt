@@ -1,13 +1,12 @@
 package com.c22ps305team.saferoute.repository
 
 import com.c22ps305team.saferoute.api.ApiService
+import com.google.gson.JsonObject
 
 class UserRepository(private val apiService: ApiService) {
 
-
-    suspend fun uploadCrimeReport(date: String, time: Int, lat: Float, long: Float, typeCrime: String) =
-        apiService.reportCrime(date, time, lat, long, typeCrime)
-
+    suspend fun uploadCrimeReport(report: JsonObject) =
+        apiService.reportCrime(report)
 
 
     companion object {

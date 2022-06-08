@@ -20,6 +20,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
+import com.google.type.LatLng
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -56,6 +57,12 @@ class HomeFragment : Fragment() {
         setupPlaceInfo()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        getCurrentLocation()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -79,6 +86,7 @@ class HomeFragment : Fragment() {
                 if (currentLocation != null){
                     val lat = currentLocation.latitude
                     val long = currentLocation.longitude
+                    //Log.e("getCurrentLocation: ", " lat = $lat long = $long" )
                     getCityName(lat, long)
                 } else {
                     Toast.makeText(requireContext(), "Nyalakan location!!", Toast.LENGTH_SHORT).show()
@@ -91,12 +99,12 @@ class HomeFragment : Fragment() {
 
 
     private fun getCityName(lat: Double, long: Double) {
-        var geoCoder = Geocoder(requireContext().applicationContext, Locale.getDefault())
-        var address = geoCoder.getFromLocation(lat, long, 1)
-        val cityName: String = address.get(0).locality
+        val geoCoder = Geocoder(requireContext().applicationContext, Locale.getDefault())
+        val address = geoCoder.getFromLocation(lat, long, 1)
+        val cityName: String = address[0].locality
 
-        binding.tvAreaName.text = cityName
-        Log.e("getCityName: ", cityName)
+        //binding.tvAreaName.text = cityName
+        //Log.e("getCityName: ", cityName)
     }
 
 
