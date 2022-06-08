@@ -15,6 +15,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,7 +24,6 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.data.ClusteringDataModel
 import com.c22ps305team.saferoute.databinding.FragmentMapsBinding
@@ -40,6 +41,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 
 
+@SuppressLint("UnspecifiedImmutableFlag")
 class MapsFragment : Fragment() {
 
     private lateinit var mMap: GoogleMap
@@ -52,32 +54,6 @@ class MapsFragment : Fragment() {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private var range: Double = 0.0
-
-
-    private val callback = OnMapReadyCallback { googleMap ->
-        mMap = googleMap
-        mMap.uiSettings.isCompassEnabled = true
-        mMap.uiSettings.isMyLocationButtonEnabled = false
-
-        markerCentroids()
-    }
-
-
-    //Pending Intent ke BroadcastReceiver
-    private val geofencePendingIntent: PendingIntent by lazy {
-        val intent = Intent(requireActivity(), GeofenceBroadcastReceiver::class.java)
-        intent.action = GeofenceBroadcastReceiver.ACTION_GEOFENCE_EVENT
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getBroadcast(requireActivity(), 0, intent, PendingIntent.FLAG_MUTABLE)
-        } else {
-            PendingIntent.getBroadcast(
-                requireActivity(),
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-            )
-        }
-    }
 
 
     override fun onCreateView(
@@ -97,20 +73,49 @@ class MapsFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
-        binding.btnFilterMap.setOnClickListener {
-            val dialog = BottomSheetDialog(requireContext())
-            val filterBottomSheet = layoutInflater.inflate(R.layout.filter_map_bottom_sheet, null)
-
-            dialog.setContentView(filterBottomSheet)
-            dialog.show()
-        }
-
-        setupViewModel()
+        setUpFilterBottomSheet()
     }
 
+    private val callback = OnMapReadyCallback { googleMap ->
+        mMap = googleMap
+        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isMyLocationButtonEnabled = false
 
-    private fun setupViewModel() {
-        mapsViewModel = ViewModelProvider(requireActivity()).get(MapsViewModel::class.java)
+        val jakarta = LatLng(-6.2147648, 106.8085002)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 11f))
+
+        markerCentroids()
+    }
+
+    // Filter Bottom Sheet
+    private fun setUpFilterBottomSheet() {
+        binding.btnFilterMap.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val bottomSheetView = LayoutInflater.from(requireContext()).inflate(
+                R.layout.filter_map_bottom_sheet,
+                view?.findViewById(R.id.filterBsContainer)
+            )
+            val btnClose = bottomSheetView.findViewById<ImageButton>(R.id.btnCloseFilterBottomSheet)
+            val selectCentroid = bottomSheetView.findViewById<FrameLayout>(R.id.selectCentroid)
+            val selectArea = bottomSheetView.findViewById<FrameLayout>(R.id.selectArea)
+
+            btnClose
+                .setOnClickListener {
+                    dialog.dismiss()
+                }
+            selectCentroid.setOnClickListener {
+                dialog.dismiss()
+                mMap.clear()
+                markerCentroids()
+            }
+            selectArea.setOnClickListener {
+                dialog.dismiss()
+                mMap.clear()
+            }
+
+            dialog.setContentView(bottomSheetView)
+            dialog.show()
+        }
     }
 
     //Centroids
@@ -118,8 +123,6 @@ class MapsFragment : Fragment() {
         val jsonFileString = readJsonFile(requireContext(), "clustering.json")
         val centroid: ClusteringDataModel =
             Gson().fromJson(jsonFileString, ClusteringDataModel::class.java)
-        val jakarta = LatLng(-6.2147648, 106.8085002)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 15f))
 
         //get data
         for (i in centroid.centroids!!.indices) {
@@ -210,6 +213,21 @@ class MapsFragment : Fragment() {
         }
     }
 
+    //Pending Intent ke BroadcastReceiver
+    private val geofencePendingIntent: PendingIntent by lazy {
+        val intent = Intent(requireActivity(), GeofenceBroadcastReceiver::class.java)
+        intent.action = GeofenceBroadcastReceiver.ACTION_GEOFENCE_EVENT
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(requireActivity(), 0, intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(
+                requireActivity(),
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+        }
+    }
 
     //GEOFENCE
     @SuppressLint("MissingPermission")
