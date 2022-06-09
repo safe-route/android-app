@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         /*setupViewModel()
         setupObserver()*/
         getCurrentLocation()
-        setupPlaceInfo()
+        //setupPlaceInfo()
     }
 
     override fun onResume() {
@@ -87,7 +87,7 @@ class HomeFragment : Fragment() {
                     val lat = currentLocation.latitude
                     val long = currentLocation.longitude
                     //Log.e("getCurrentLocation: ", " lat = $lat long = $long" )
-                    getCityName(lat, long)
+                    //PERBAIKI KETIKA LATLONG == NULL getCityName(lat, long)
                 } else {
                     Toast.makeText(requireContext(), "Nyalakan location!!", Toast.LENGTH_SHORT).show()
                 }
@@ -108,7 +108,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    private fun setupPlaceInfo() {
+    /*private fun setupPlaceInfo() {
         placeInfoData = arrayListOf()
         placeInfoAdapter = PlaceInfoAdapter(placeInfoData)
 
@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
 
         eventChangeListener()
 
-    }
+    }*/
 
 
     private fun eventChangeListener() {
