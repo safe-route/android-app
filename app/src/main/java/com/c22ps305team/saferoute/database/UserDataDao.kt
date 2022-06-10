@@ -1,9 +1,7 @@
 package com.c22ps305team.saferoute.database
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 @Dao
 interface UserDataDao {
@@ -12,4 +10,7 @@ interface UserDataDao {
 
     @Delete
     fun delete(userData: UserData)
+
+    @Query("SELECT * FROM userdata")
+    fun getUserData(): LiveData<List<UserData>>
 }

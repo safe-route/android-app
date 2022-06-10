@@ -20,7 +20,7 @@ abstract class UserDataRoomDatabase : RoomDatabase() {
                 synchronized(UserDataRoomDatabase::class.java) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
-                        UserDataRoomDatabase::class.java, "userData_Database"
+                        UserDataRoomDatabase::class.java, "userdata_database"
                     )
                         .build()
                 }
