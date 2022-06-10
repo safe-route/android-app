@@ -2,6 +2,7 @@ package com.c22ps305team.saferoute.ui.main.home
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -39,6 +40,8 @@ class HomeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -55,6 +58,21 @@ class HomeFragment : Fragment() {
         setupObserver()*/
         getCurrentLocation()
         //setupPlaceInfo()
+
+        setupBanner()
+
+
+    }
+
+
+    private fun setupBanner() {
+        val banner = binding.bannerArea
+        banner.setCardBackgroundColor(Color.parseColor("#9AEFD3"))
+
+        /*val area = binding.tvAreaName
+        val description = binding.tvDescArea
+        val image = binding.ivSafe*/
+
     }
 
     override fun onResume() {
