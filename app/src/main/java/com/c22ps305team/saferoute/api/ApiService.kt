@@ -1,8 +1,6 @@
 package com.c22ps305team.saferoute.api
 
-import com.c22ps305team.saferoute.data.DirectionsResponse
-import com.c22ps305team.saferoute.data.ReportCrimeResponse
-import com.c22ps305team.saferoute.data.SearchPlaceResponse
+import com.c22ps305team.saferoute.data.*
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Response
@@ -35,6 +33,16 @@ interface ApiService {
     suspend fun reportCrime(
         @Body crimeReport: JsonObject
     ): Response<ReportCrimeResponse>
+
+    // Coordinate
+    @GET("/")
+    fun getAllCoordinate(): Call<CoordinateResponse>
+
+    // Area Statistic
+    @POST("/")
+    fun getAreaStatistic(
+        @Body areaName: JsonObject
+    ): Call<AreaStatisticResponse>
 
 
 }
