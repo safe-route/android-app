@@ -14,9 +14,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.c22ps305team.saferoute.data.InfoTips
+import com.c22ps305team.saferoute.data.InfoTipsData
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.databinding.FragmentHomeBinding
 import com.c22ps305team.saferoute.ui.main.detail.DetailPlaceActivity
+import com.c22ps305team.saferoute.ui.main.detail.DetailTipsActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.*
@@ -29,16 +32,18 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
 
+    private lateinit var homeViewModel: HomeViewModel
 
     private lateinit var placeInfoData: ArrayList<Statistic>
     private lateinit var placeInfoAdapter: PlaceInfoAdapter
     private lateinit var db: FirebaseFirestore
 
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+
+    private lateinit var tipsInfoAdapter: TipsInfoAdapter
+    private lateinit var listInfoTips: ArrayList<InfoTips>
 
 
 
@@ -56,24 +61,19 @@ class HomeFragment : Fragment() {
 
         /*setupViewModel()
         setupObserver()*/
-        getCurrentLocation()
-        //setupPlaceInfo()
+
+
 
         setupBanner()
+        getCurrentLocation()
 
 
-    }
-
-
-    private fun setupBanner() {
-        val banner = binding.bannerArea
-        banner.setCardBackgroundColor(Color.parseColor("#9AEFD3"))
-
-        /*val area = binding.tvAreaName
-        val description = binding.tvDescArea
-        val image = binding.ivSafe*/
+        //setupPlaceInfo()
+        setupTipsInfo()
 
     }
+
+
 
     override fun onResume() {
         super.onResume()
@@ -126,7 +126,28 @@ class HomeFragment : Fragment() {
     }
 
 
-    /*private fun setupPlaceInfo() {
+    private fun setupTipsInfo(){
+        listInfoTips = arrayListOf()
+        listInfoTips.addAll(InfoTipsData.listData)
+        Log.e("setupTipsInfo: ", InfoTipsData.listData.toString() )
+        tipsInfoAdapter = TipsInfoAdapter(listInfoTips)
+
+        binding.rvTips.apply {
+            adapter = tipsInfoAdapter
+            layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
+        tipsInfoAdapter.setOnItemClickCallback(object : TipsInfoAdapter.OnItemClickCallback{
+            override fun onItemClicked(infoTips: InfoTips) {
+                val intent = Intent(requireContext(), DetailTipsActivity::class.java)
+                intent.putExtra(DetailTipsActivity.EXTRA_TIPS, infoTips)
+                startActivity(intent)
+            }
+        })
+    }
+
+
+    private fun setupPlaceInfo() {
         placeInfoData = arrayListOf()
         placeInfoAdapter = PlaceInfoAdapter(placeInfoData)
 
@@ -146,12 +167,10 @@ class HomeFragment : Fragment() {
             }
         })
 
-        //setData
-        //placeInfoAdapter.setData(placeInfoData)
 
         eventChangeListener()
 
-    }*/
+    }
 
 
     private fun eventChangeListener() {
@@ -171,6 +190,16 @@ class HomeFragment : Fragment() {
                 placeInfoAdapter.notifyDataSetChanged()
             }
         })
+    }
+
+
+    private fun setupBanner() {
+        val banner = binding.bannerArea
+        banner.setCardBackgroundColor(Color.parseColor("#9AEFD3"))
+
+        /*val area = binding.tvAreaName
+        val description = binding.tvDescArea
+        val image = binding.ivSafe*/
     }
 
 
