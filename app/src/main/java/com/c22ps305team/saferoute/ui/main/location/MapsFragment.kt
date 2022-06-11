@@ -6,8 +6,6 @@ import android.annotation.TargetApi
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -20,14 +18,19 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.DrawableRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.data.ClusteringDataModel
+import com.c22ps305team.saferoute.data.CoordinateResponse
+import com.c22ps305team.saferoute.data.CoordinatesItem
 import com.c22ps305team.saferoute.databinding.FragmentMapsBinding
 import com.c22ps305team.saferoute.utils.readJsonFile
+import com.c22ps305team.saferoute.utils.vectorToBitmap
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
 import com.google.android.gms.location.GeofencingRequest
@@ -39,21 +42,26 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.maps.android.PolyUtil
 
 
 @SuppressLint("UnspecifiedImmutableFlag")
-class MapsFragment : Fragment() {
+class MapsFragment : Fragment(), GoogleMap.OnPolygonClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var geofencingClient: GeofencingClient
-    private lateinit var mapsViewModel: MapsViewModel
 
     private var _binding: FragmentMapsBinding? = null
     private val binding get() = _binding!!
+    private val mapsViewModel by viewModels<MapsViewModel>()
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
     private var range: Double = 0.0
+
+    private val latLngList = ArrayList<LatLng>()
+    private val rangeList = ArrayList<Double>()
 
 
     override fun onCreateView(
@@ -73,7 +81,40 @@ class MapsFragment : Fragment() {
             childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
 
+
         setUpFilterBottomSheet()
+        setupInformationBottomSheet()
+        updateInformationBottomSheet()
+        mapsViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
+        }
+    }
+
+    private fun updateInformationBottomSheet() {
+        val tvAreaName = view?.findViewById<TextView>(R.id.tvAreaName)
+        val tvStateValue = view?.findViewById<TextView>(R.id.tvStateValue)
+        val tvStatePrecentage = view?.findViewById<TextView>(R.id.tvStatePercentage)
+        val tvCurrentInfo = view?.findViewById<TextView>(R.id.tvTotalCrime)
+        mapsViewModel.dataAreaStatistic.observe(viewLifecycleOwner) {
+            tvAreaName?.text = it.subdistrict
+            tvStatePrecentage?.apply {
+                visibility = View.VISIBLE
+                text = it.totalCrime.toString()
+            }
+        }
+    }
+
+    private fun setupInformationBottomSheet() {
+        val tvAreaName = view?.findViewById<TextView>(R.id.tvAreaName)
+        val tvStateValue = view?.findViewById<TextView>(R.id.tvStateValue)
+        val tvStatePrecentage = view?.findViewById<TextView>(R.id.tvStatePercentage)
+        val tvCurrentInfo = view?.findViewById<TextView>(R.id.tvTotalCrime)
+
+        tvAreaName?.text = resources.getString(R.string.statistic_crime_info)
+        tvStateValue?.text = resources.getString(R.string.latest_info)
+
+        tvStatePrecentage?.visibility = View.GONE
+        tvCurrentInfo?.visibility = View.GONE
     }
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -84,7 +125,9 @@ class MapsFragment : Fragment() {
         val jakarta = LatLng(-6.2147648, 106.8085002)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(jakarta, 11f))
 
-        markerCentroids()
+//        markerCentroids()
+        mMap.setOnPolygonClickListener(this)
+        drawSubdistrict()
     }
 
     // Filter Bottom Sheet
@@ -111,6 +154,7 @@ class MapsFragment : Fragment() {
             selectArea.setOnClickListener {
                 dialog.dismiss()
                 mMap.clear()
+                drawSubdistrict()
             }
 
             dialog.setContentView(bottomSheetView)
@@ -119,18 +163,21 @@ class MapsFragment : Fragment() {
     }
 
     //Centroids
+    @SuppressLint("PotentialBehaviorOverride")
     private fun markerCentroids() {
         val jsonFileString = readJsonFile(requireContext(), "clustering.json")
         val centroid: ClusteringDataModel =
             Gson().fromJson(jsonFileString, ClusteringDataModel::class.java)
 
+
         //get data
         for (i in centroid.centroids!!.indices) {
-
             latitude = centroid.centroids[i]?.latitude!!
             longitude = centroid.centroids[i]?.longitude!!
             range = centroid.centroids[i]?.range!!
 
+            latLngList.add(LatLng(latitude, longitude))
+            rangeList.add(range)
 
             //marker
             val latLng = LatLng(latitude, longitude)
@@ -154,10 +201,65 @@ class MapsFragment : Fragment() {
             tvAreaName?.text = marker.title
             true
         }
-
-
-        getMyLocation()
         addGeofence()
+        getMyLocation()
+    }
+
+    // Tiling Disctrict
+    private fun drawSubdistrict() {
+        val jsonFileString = readJsonFile(requireContext(), "area_statistic.json")
+        val data: CoordinateResponse =
+            Gson().fromJson(jsonFileString, CoordinateResponse::class.java)
+
+
+        val coordinates = ArrayList<List<CoordinatesItem>>()
+//
+        for (i in data.statistic?.indices!!) {
+            coordinates.add(data.statistic[i]?.coordinates as List<CoordinatesItem>)
+        }
+
+        var allArea: MutableList<LatLng?>
+        for (i in coordinates.indices) {
+            allArea = ArrayList()
+            for (j in coordinates[i].indices) {
+                allArea.add(LatLng(coordinates[i][j].latitude!!, coordinates[i][j].longitude!!))
+            }
+            if (data.statistic[i]?.totalCrime!! >= 90) {
+                mMap.addPolygon(
+                    PolygonOptions()
+                        .addAll(PolyUtil.simplify(allArea, 3.0))
+                        .fillColor(0x22FF0000)
+                        .strokeWidth(3f)
+                        .clickable(true)
+                ).tag = data.statistic[i]?.subdistrict
+            } else if (data.statistic[i]?.totalCrime!! in 50..89) {
+                mMap.addPolygon(
+                    PolygonOptions()
+                        .addAll(PolyUtil.simplify(allArea, 3.0))
+                        .fillColor(0x22FCFC0F)
+                        .strokeWidth(3f)
+                        .clickable(true)
+                ).tag = data.statistic[i]?.subdistrict
+            } else {
+                mMap.addPolygon(
+                    PolygonOptions()
+                        .addAll(PolyUtil.simplify(allArea, 3.0))
+                        .fillColor(0x220DE096)
+                        .strokeWidth(3f)
+                        .clickable(true)
+                ).tag = data.statistic[i]?.subdistrict
+            }
+        }
+    }
+
+    override fun onPolygonClick(polygon: Polygon) {
+        var color = polygon.strokeColor xor 0x00ffffff
+        polygon.strokeColor = color
+        color = polygon.fillColor xor 0x00ffffff
+        polygon.fillColor = color
+        val areaName = JsonObject()
+        areaName.addProperty("subdistrict", polygon.tag.toString())
+        mapsViewModel.getDataAreaStatistic(areaName)
     }
 
 
@@ -229,67 +331,114 @@ class MapsFragment : Fragment() {
         }
     }
 
+    // Geofence Request
+    private fun getGeofencingRequest(): GeofencingRequest {
+        val geoFenceList: ArrayList<Geofence> = ArrayList()
+
+        rangeList.forEachIndexed { index, it ->
+            geoFenceList.add(
+                Geofence.Builder()
+                    .setRequestId("Danger")
+                    .setCircularRegion(
+                        latLngList[index].latitude,
+                        latLngList[index].longitude,
+                        rangeList[index].toFloat()
+                    )
+                    .setExpirationDuration(Geofence.NEVER_EXPIRE)
+                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER)
+                    .setLoiteringDelay(5000)
+                    .build()
+            )
+        }
+
+        val builder = GeofencingRequest.Builder()
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+        builder.addGeofences(geoFenceList)
+        return builder.build()
+    }
+
     //GEOFENCE
     @SuppressLint("MissingPermission")
     private fun addGeofence() {
         //geofencing
-        geofencingClient = LocationServices.getGeofencingClient(requireActivity())
+        geofencingClient = LocationServices.getGeofencingClient(requireContext())
 
-        val geofence = Geofence.Builder()
-            .setRequestId("Danger")
-            .setCircularRegion(
-                latitude,
-                longitude,
-                range.toFloat()
-            )
-            .setExpirationDuration(Geofence.NEVER_EXPIRE)
-            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER)
-            .setLoiteringDelay(5000)
-            .build()
 
-        val geofencingRequest = GeofencingRequest.Builder()
-            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-            .addGeofence(geofence)
-            .build()
+//        val geofence = Geofence.Builder()
+//            .setRequestId("Danger")
+//            .setCircularRegion(
+//                latitude,
+//                longitude,
+//                range.toFloat()
+//            )
+//            .setExpirationDuration(Geofence.NEVER_EXPIRE)
+//            .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_DWELL or Geofence.GEOFENCE_TRANSITION_ENTER)
+//            .setLoiteringDelay(5000)
+//            .build()
+//
+//        Log.d("LatLng: ", "$latitude, $longitude")
+//
+//        val geofencingRequest = GeofencingRequest.Builder()
+//            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
+//            .addGeofences(geoFenceList)
+//            .build()
 
-        geofencingClient.removeGeofences(geofencePendingIntent).run {
-            addOnCompleteListener {
-                geofencingClient.addGeofences(geofencingRequest, geofencePendingIntent).run {
-                    addOnSuccessListener {
-                        showToast("Geofencing added")
-                    }
-                    addOnFailureListener {
-                        showToast("Geofencing not added : ${it.message}")
-                    }
-                }
+//        geofencingClient.removeGeofences(geofencePendingIntent).run {
+//            addOnCompleteListener {
+//                geofencingClient.addGeofences(getGeofencingRequest(), geofencePendingIntent).run {
+//                    addOnSuccessListener {
+//                        showToast("Geofencing added")
+//                    }
+//                    addOnFailureListener {
+//                        showToast("Geofencing not added : ${it.message}")
+//                    }
+//                }
+//            }
+//        }
+
+        geofencingClient.addGeofences(getGeofencingRequest(), geofencePendingIntent).run {
+            addOnSuccessListener {
+                showToast("Geofencing added")
+            }
+            addOnFailureListener {
+                showToast("Geofencing not added : ${it.message}")
             }
         }
-
+        Log.d("Apa: ", getGeofencingRequest().toString())
     }
-
-
-    private fun vectorToBitmap(@DrawableRes id: Int): BitmapDescriptor {
-        val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
-        if (vectorDrawable == null) {
-            Log.e("BitmapHelper", "Resource not found")
-            return BitmapDescriptorFactory.defaultMarker()
-        }
-        val bitmap = Bitmap.createBitmap(
-            vectorDrawable.intrinsicWidth,
-            vectorDrawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-        vectorDrawable.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
-    }
-
 
     private fun showToast(text: String) {
         Toast.makeText(requireActivity(), text, Toast.LENGTH_SHORT).show()
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        val shimerMapBottomSheet = view?.findViewById<ShimmerFrameLayout>(R.id.shimerMapBottomSheet)
+        val headerBottomSheet = view?.findViewById<ConstraintLayout>(R.id.headerMapBottomSheet)
+
+        if (isLoading) {
+            shimerMapBottomSheet?.visibility = View.VISIBLE
+            shimerMapBottomSheet?.startShimmer()
+            headerBottomSheet?.visibility = View.GONE
+        } else {
+            shimerMapBottomSheet?.stopShimmer()
+            shimerMapBottomSheet?.visibility = View.GONE
+            headerBottomSheet?.visibility = View.VISIBLE
+        }
+    }
+
+//    override fun onResume() {
+//        val shimerMapBottomSheet = view?.findViewById<ShimmerFrameLayout>(R.id.shimerMapBottomSheet)
+//        super.onResume()
+//
+//        shimerMapBottomSheet?.stopShimmer()
+//    }
+
+//    override fun onPause() {
+//        val shimerMapBottomSheet = view?.findViewById<ShimmerFrameLayout>(R.id.shimerMapBottomSheet)
+//        super.onPause()
+//
+//        shimerMapBottomSheet?.stopShimmer()
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -301,5 +450,4 @@ class MapsFragment : Fragment() {
             arguments = Bundle().apply { }
         }
     }
-
 }
