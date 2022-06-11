@@ -40,10 +40,10 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("signup")
-    fun register(
+    suspend fun register(
         @Field("username") username: String,
         @Field("password") password: String
-    ): Call<SignUpResponse>
+    ): Response<SignUpResponse>
 
 
     @FormUrlEncoded

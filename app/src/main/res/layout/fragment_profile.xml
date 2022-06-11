@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivUser" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tvEmail"
         style="@style/Text"
         android:layout_width="wrap_content"
@@ -41,34 +41,19 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />-->
 
-    <!-- <TextView
-         android:id="@+id/text_journey"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         style="@style/Text.Title"
-         android:text="Histori perjalanan:"
-         android:textAlignment="textStart"
-         android:layout_marginTop="40dp"
-         android:layout_marginHorizontal="10dp"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toBottomOf="@+id/text_email"/>
-
-     <androidx.recyclerview.widget.RecyclerView
-         android:id="@+id/recyclerView"
-         android:layout_width="0dp"
-         android:layout_height="0dp"
-         android:layout_marginStart="8dp"
-         android:layout_marginTop="16dp"
-         android:layout_marginBottom="8dp"
-         android:layout_marginEnd="8dp"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintTop_toBottomOf="@id/text_journey"
-         tools:listitem="@layout/user_journey"
-         />-->
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="LOGOUT"
+        android:fontFamily="@font/product_sans_bold"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

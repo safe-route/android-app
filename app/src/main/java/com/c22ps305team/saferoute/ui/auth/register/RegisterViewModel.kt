@@ -18,11 +18,11 @@ import retrofit2.Response
 
 class RegisterViewModel(private val repository: UserAuthRepository): ViewModel() {
 
-    private var _registerResponse = MutableLiveData<SignUpResponse>()
-    val registerResponse: LiveData<SignUpResponse> = _registerResponse
+    private val _registerResponse = MutableLiveData<Result<SignUpResponse>>()
+    val registerResponse: LiveData<Result<SignUpResponse>> = _registerResponse
 
 
-    /*fun register(username: String, password: String) = viewModelScope.launch {
+    fun register(username: String, password: String) = viewModelScope.launch {
         _registerResponse.value = Result.Loading()
         try {
             val response = repository.register(username, password)
@@ -32,9 +32,9 @@ class RegisterViewModel(private val repository: UserAuthRepository): ViewModel()
             _registerResponse.value = Result.Error(e.message)
             Log.e( "RegisterViewModel", e.message.toString() )
         }
-    }*/
+    }
 
-    fun register(username: String, password: String){
+    /*fun register(username: String, password: String){
         val client = ApiAuthConfig.getApiService().register(username, password)
         client.enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(
@@ -54,7 +54,7 @@ class RegisterViewModel(private val repository: UserAuthRepository): ViewModel()
 
 
 
-    }
+    }*/
 
 
 

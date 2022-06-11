@@ -12,6 +12,7 @@ import com.c22ps305team.saferoute.repository.UserRepository
 import com.c22ps305team.saferoute.ui.auth.login.LoginViewModel
 import com.c22ps305team.saferoute.ui.auth.register.RegisterActivity
 import com.c22ps305team.saferoute.ui.auth.register.RegisterViewModel
+import com.c22ps305team.saferoute.ui.main.profile.ProfileViewModel
 import com.c22ps305team.saferoute.ui.main.reportCrime.CrimeReportViewModel
 import com.c22ps305team.saferoute.ui.splash.SplashViewModel
 import java.lang.IllegalArgumentException
@@ -38,6 +39,9 @@ class ViewModelFactory(
             }
             modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
                 SplashViewModel(userAuthRepository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(userAuthRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
         }

@@ -1,13 +1,21 @@
 package com.c22ps305team.saferoute.ui.main.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import com.c22ps305team.saferoute.repository.UserAuthRepository
+import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(private val repo: UserAuthRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
+
+
+    fun fetchUser(): LiveData<String>{
+        return repo.fetchUser().asLiveData()
     }
-    val text: LiveData<String> = _text
+
+    fun deleteUser() = viewModelScope.launch {
+        repo.deleteUser()
+    }
+
+
+
 }

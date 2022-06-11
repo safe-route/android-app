@@ -1,7 +1,6 @@
 package com.c22ps305team.saferoute.repository
 
 import com.c22ps305team.saferoute.api.ApiService
-import com.c22ps305team.saferoute.data.auth.AuthRequest
 import com.c22ps305team.saferoute.database.UserPreferences
 
 
@@ -11,7 +10,7 @@ class UserAuthRepository(
 ) {
 
 
-    fun register(username: String, password: String) = api.register(username, password)
+    suspend fun register(username: String, password: String) = api.register(username, password)
 
     suspend fun login(username: String, password: String) = api.login(username, password)
 

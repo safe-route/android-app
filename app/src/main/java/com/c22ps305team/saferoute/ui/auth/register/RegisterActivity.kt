@@ -34,6 +34,9 @@ class RegisterActivity : AppCompatActivity() {
             val username = binding.edtUsername.text.toString().trim()
             val password = binding.edtPassword.text.toString().trim()
 
+
+            regViewModel.register(username, password)
+
             when{
                 username.isEmpty() -> {
                     //error("Must Be Filled")
@@ -43,7 +46,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 else -> {
                     //val register = AuthRequest(username, password)
-                    regViewModel.register(username, password)
+
                 }
             }
 

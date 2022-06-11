@@ -35,7 +35,7 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
 
     fun fetchUser(): Flow<String> {
         return dataStore.data.map { preference ->
-            preference[TOKEN_KEY] ?: ""
+            preference[USER] ?: ""
         }
     }
 
