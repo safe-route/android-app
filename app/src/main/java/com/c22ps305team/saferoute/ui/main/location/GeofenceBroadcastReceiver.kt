@@ -19,7 +19,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         if (intent.action == ACTION_GEOFENCE_EVENT) {
 
             val geofencingEvent = GeofencingEvent.fromIntent(intent)
-            if (geofencingEvent.hasError()) {
+            if (geofencingEvent?.hasError()!!) {
                 val errorMessage =
                     GeofenceStatusCodes.getStatusCodeString(geofencingEvent.errorCode)
                 Log.e(TAG, errorMessage)
@@ -37,7 +37,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
                     }
 
                 val triggeringGeofences = geofencingEvent.triggeringGeofences
-                val requestId = triggeringGeofences[0].requestId
+                val requestId = triggeringGeofences!![0].requestId
                 val geofenceTransitionDetails = "$geofenceTransitionString $requestId"
                 Log.i(TAG, geofenceTransitionDetails)
 
