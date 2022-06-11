@@ -55,7 +55,8 @@ class MakeRouteViewModel : ViewModel() {
     fun searchPlace(query: String, apiKey: String) {
         _isLoading.value = true
 
-        val client = ApiMapsConfig.getApiService().searchPlace(query, "id", apiKey)
+        val client =
+            ApiMapsConfig.getApiService().searchPlace("-6.229728,106.6894283", query, "id", apiKey)
         client.enqueue(object : Callback<SearchPlaceResponse> {
             override fun onResponse(
                 call: Call<SearchPlaceResponse>,
