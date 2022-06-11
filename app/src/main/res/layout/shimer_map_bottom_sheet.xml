@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/headerMapBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:padding="4dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/imageView">
+
+    <TextView
+        android:id="@+id/tvAreaName"
+        style="@style/Text.Heading1.AreaName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="160dp"
+        android:background="@color/light_grey"
+        android:padding="3dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvStatePercentage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/jakarta_pusat" />
+
+    <TextView
+        android:id="@+id/tvStateValue"
+        style="@style/Text.Heading2.StateDanger"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="200dp"
+        android:background="@color/light_grey"
+        android:padding="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvStatePercentage"
+        app:layout_constraintStart_toStartOf="@+id/tvAreaName"
+        app:layout_constraintTop_toBottomOf="@+id/tvAreaName"
+        tools:text="@string/danger_state" />
+
+    <TextView
+        android:id="@+id/tvStatePercentage"
+        style="@style/Text.Heading2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:background="@color/light_grey"
+        android:padding="2dp"
+        android:textColor="@color/red"
+        app:layout_constraintBottom_toBottomOf="@+id/tvStateValue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvAreaName"
+        tools:text="@string/state_percentage" />
+</androidx.constraintlayout.widget.ConstraintLayout>

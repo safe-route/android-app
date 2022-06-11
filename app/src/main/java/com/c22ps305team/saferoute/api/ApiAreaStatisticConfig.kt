@@ -6,8 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class ApiConfig {
-
+class ApiAreaStatisticConfig {
     companion object {
         fun getApiService(): ApiService {
             val loggingInterceptor = if (BuildConfig.DEBUG) {
@@ -19,7 +18,7 @@ class ApiConfig {
             val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
             val retrofit =
                 Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("https://get-subdistrict-stat-ck44nnq7hq-et.a.run.app/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()
@@ -27,5 +26,4 @@ class ApiConfig {
             return retrofit.create(ApiService::class.java)
         }
     }
-
 }
