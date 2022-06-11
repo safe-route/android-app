@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.c22ps305team.saferoute">
+    package="com.c22ps305team.saferoute" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -14,18 +14,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
+        android:theme="@style/Theme.MyApplication" >
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAYmjp_4eP65go9My1mlp4VtmfpF3vHtj4" />
+
         <activity
             android:name=".ui.main.detail.DetailTipsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.detail.DetailPlaceActivity"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAYmjp_4eP65go9My1mlp4VtmfpF3vHtj4" />
-
         <activity
             android:name=".ui.main.makeRoute.MakeRouteActivity"
             android:exported="false"
@@ -34,11 +35,15 @@
             android:name=".ui.auth.register.RegisterActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.auth.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="true">
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

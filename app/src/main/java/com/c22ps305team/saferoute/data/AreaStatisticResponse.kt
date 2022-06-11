@@ -4,17 +4,23 @@ import com.google.gson.annotations.SerializedName
 
 data class AreaStatisticResponse(
 
-    @field:SerializedName("crime_info")
-    val crimeInfo: CrimeInfos? = null,
+    @field:SerializedName("subdistrict")
+    val subdistrict: String? = null,
 
     @field:SerializedName("total_crime")
     val totalCrime: Int? = null,
 
-    @field:SerializedName("subdistrict")
-    val subdistrict: String? = null,
 
-    val listCrime: List<CrimeInfos>? = null
+    @field:SerializedName("crime_info")
+    val crimeInfo: MutableMap<String, Int>? = null,
+    //val crimeInfo: CrimeInfos? = null,
+
+    //val listCrime: List<CrimeInfos>? = null
+
+
+
 )
+/*
 
 data class CrimeInfos(
 
@@ -105,3 +111,4 @@ data class CrimeInfos(
     @field:SerializedName("Stalking")
     val stalking: Int? = null
 )
+*/

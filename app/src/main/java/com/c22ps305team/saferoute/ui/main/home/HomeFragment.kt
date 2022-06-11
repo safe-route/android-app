@@ -65,7 +65,7 @@ class HomeFragment : Fragment() {
 
 
         setupBanner()
-        getCurrentLocation()
+        //getCurrentLocation()
 
 
         //setupPlaceInfo()
@@ -78,7 +78,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        getCurrentLocation()
+        //getCurrentLocation()
     }
 
     override fun onDestroyView() {

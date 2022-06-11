@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.c22ps305team.saferoute.api.ApiAreaStatisticConfig
 import com.c22ps305team.saferoute.data.AreaStatisticResponse
-import com.c22ps305team.saferoute.data.CrimeInfos
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Callback

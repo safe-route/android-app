@@ -3,7 +3,7 @@ package com.c22ps305team.saferoute.ui.main.detail
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.c22ps305team.saferoute.databinding.ItemCrimeInfoBinding
+import com.c22ps305team.saferoute.databinding.ItemAreaInfoBinding
 
 class CrimeInfoAdapter(private val crimeInfoList: MutableMap<String, Int>) : RecyclerView.Adapter<CrimeInfoAdapter.ViewHolder>() {
 
@@ -13,7 +13,7 @@ class CrimeInfoAdapter(private val crimeInfoList: MutableMap<String, Int>) : Rec
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCrimeInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemAreaInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -23,7 +23,7 @@ class CrimeInfoAdapter(private val crimeInfoList: MutableMap<String, Int>) : Rec
 
     override fun getItemCount() = crimeInfoList.size
 
-    inner class ViewHolder(var binding: ItemCrimeInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(var binding: ItemAreaInfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(key: String, value: String){
             binding.apply {
                 tvAreaName.text = key

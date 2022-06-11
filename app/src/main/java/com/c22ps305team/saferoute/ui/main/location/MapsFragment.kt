@@ -13,17 +13,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.c22ps305team.saferoute.R
+import com.c22ps305team.saferoute.data.AreaStatisticResponse
 import com.c22ps305team.saferoute.data.ClusteringDataModel
 import com.c22ps305team.saferoute.data.CoordinateResponse
 import com.c22ps305team.saferoute.data.CoordinatesItem
@@ -95,13 +94,20 @@ class MapsFragment : Fragment(), GoogleMap.OnPolygonClickListener {
         val tvStateValue = view?.findViewById<TextView>(R.id.tvStateValue)
         val tvStatePrecentage = view?.findViewById<TextView>(R.id.tvStatePercentage)
         val tvCurrentInfo = view?.findViewById<TextView>(R.id.tvTotalCrime)
+        val rvArea = view?.findViewById<RecyclerView>(R.id.rvAreaBottom)
         mapsViewModel.dataAreaStatistic.observe(viewLifecycleOwner) {
             tvAreaName?.text = it.subdistrict
             tvStatePrecentage?.apply {
                 visibility = View.VISIBLE
                 text = it.totalCrime.toString()
             }
+
+            val dataCrime = it.crimeInfo!!
+            val rvAdapter = InfoAdapter(dataCrime)
+            rvArea?.adapter = rvAdapter
+            rvArea?.layoutManager = LinearLayoutManager(requireContext(),RecyclerView.VERTICAL, false)
         }
+
     }
 
     private fun setupInformationBottomSheet() {

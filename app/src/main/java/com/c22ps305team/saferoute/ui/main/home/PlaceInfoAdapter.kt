@@ -38,7 +38,7 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
                 /*val theft = listStatistic.crime_info.["Theft"] ?: ""
                 tvCurrentInfo.text = "Theft: " +theft*/
 
-                Log.e("list data", listStatistic.toString())
+                //Log.e("list data", listStatistic.toString())
             }
             binding.root.setOnClickListener {
                 onItemClickCallback.onItemClicked(listStatistic)

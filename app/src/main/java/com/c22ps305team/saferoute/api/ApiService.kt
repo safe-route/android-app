@@ -1,6 +1,9 @@
 package com.c22ps305team.saferoute.api
 
 import com.c22ps305team.saferoute.data.*
+import com.c22ps305team.saferoute.data.auth.AuthRequest
+import com.c22ps305team.saferoute.data.auth.LoginResponse
+import com.c22ps305team.saferoute.data.auth.SignUpResponse
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Response
@@ -34,7 +37,23 @@ interface ApiService {
         @Body crimeReport: JsonObject
     ): Response<ReportCrimeResponse>
 
-    // Coordinate
+
+    @FormUrlEncoded
+    @POST("signup")
+    fun register(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Call<SignUpResponse>
+
+
+    @FormUrlEncoded
+    @POST("login")
+    suspend fun login(
+        @Field("username") username: String,
+        @Field("password") password: String
+    ): Response<LoginResponse>
+
+
     @GET("/")
     fun getAllCoordinate(): Call<CoordinateResponse>
 
@@ -43,6 +62,5 @@ interface ApiService {
     fun getAreaStatistic(
         @Body areaName: JsonObject
     ): Call<AreaStatisticResponse>
-
 
 }

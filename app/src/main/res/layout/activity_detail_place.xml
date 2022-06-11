@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barChart"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_crime_info"/>
+        tools:listitem="@layout/item_area_info"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
