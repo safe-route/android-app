@@ -16,7 +16,7 @@
     <string name="area_info">Info Daerah</string>
 
     <string name="tips_info">Tips</string>
-    <string name="current_info">Info Terkini</string>
+    <string name="total_crime">Total Crime</string>
     <string name="jakarta_pusat">Jakarta Pusat</string>
     <string name="jakarta_selatan">Jakarta Selatan</string>
     <string name="state_percentage">60%</string>
@@ -42,6 +42,11 @@
     <string name="chose_info">Pilih informasi</string>
     <string name="danger_area">Titik Berbahaya</string>
     <string name="districts_info">Info Kecamatan</string>
+    <string name="start_journey">Mulai Perjalanan</string>
+    <string name="murder">Murder</string>
+    <string name="zero">0</string>
+    <string name="statistic_crime_info">Crime Infro</string>
+    <string name="latest_info">Latest Info</string>
 
 
     <string-array name="typeCrime">
