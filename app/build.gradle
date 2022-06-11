@@ -93,4 +93,7 @@ dependencies {
     //Chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    //spinner
+    //implementation 'com.github.devdhar04:MaterialSpinner:v0.1.3'
+
 }

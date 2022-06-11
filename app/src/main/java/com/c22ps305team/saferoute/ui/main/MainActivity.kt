@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.ActivityMainBinding
-import com.c22ps305team.saferoute.ui.main.detail.CrimeInfoAdapter
 import com.c22ps305team.saferoute.ui.main.home.HomeFragment
 import com.c22ps305team.saferoute.ui.main.location.MapsFragment
 import com.c22ps305team.saferoute.ui.main.makeRoute.MakeRouteActivity
@@ -23,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         setupNavBar()
     }
@@ -64,3 +65,4 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+

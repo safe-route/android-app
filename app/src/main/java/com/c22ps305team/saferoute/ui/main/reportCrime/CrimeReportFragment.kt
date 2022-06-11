@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.c22ps305team.saferoute.R
 import com.c22ps305team.saferoute.databinding.FragmentCrimeReportBinding
 import com.c22ps305team.saferoute.utils.Result
 import com.c22ps305team.saferoute.utils.ViewModelFactory
@@ -27,9 +30,10 @@ class CrimeReportFragment : Fragment() {
     private var _binding: FragmentCrimeReportBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var location: Location? = null
+
+    private lateinit var crime: String
 
     private val crimeReportViewModel: CrimeReportViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
@@ -44,33 +48,28 @@ class CrimeReportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
+        //SpinnerCrime
+        val inputCrime = resources.getStringArray(R.array.typeCrime)
+        val spinner = binding.inputCrime
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, inputCrime)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                crime = inputCrime[position]
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-        setupObserver()
-        setupListener()
-    }
-
-    private fun setupObserver() {
-        crimeReportViewModel.reportResponse.observe(requireActivity()){response ->
-            when(response) {
-                is Result.Loading -> {
-
-                }
-                is Result.Success -> {
-                    Toast.makeText(requireContext(), "Berhasil", Toast.LENGTH_SHORT).show()
-                }
-                is Result.Error -> {
-
-                }
             }
         }
+
+        setupListener()
+        setupObserver()
     }
 
 
     private fun setupListener() {
-
         binding.switchLoc.setOnCheckedChangeListener{ _, isChecked ->
             if (isChecked){
                 getCurrentLocation()
@@ -78,10 +77,7 @@ class CrimeReportFragment : Fragment() {
                 this.location = null
             }
         }
-
         binding.btnReport.setOnClickListener {
-            //Snackbar.make(binding.root,"Laporan Terkirim! Selalu waspada & berhati-hati!", Snackbar.LENGTH_SHORT)
-            //Toast.makeText(requireContext(), "Laporan terkirim", Toast.LENGTH_SHORT).show()
             uploadReport()
         }
     }
@@ -93,20 +89,9 @@ class CrimeReportFragment : Fragment() {
 
 
     private fun uploadReport(){
-        val inputCrime = binding.inputCrime
-        val inputTime = binding.inputTime
         val shareLoc = binding.switchLoc.isChecked
         var isValid = true
 
-        if (inputCrime.text.isBlank()){
-            inputCrime.error = "Kejadian tidak boleh kosong"
-            isValid = false
-        }
-
-        if(inputTime.text.isBlank()){
-            inputTime.error = "Waktu tidak boleh kosong"
-            isValid = false
-        }
 
         if (!shareLoc){
             isValid = false
@@ -115,15 +100,14 @@ class CrimeReportFragment : Fragment() {
 
 
         if (isValid){
-
             //Date
-            val calendar = Calendar.getInstance()
+            val calendar = Calendar.getInstance().time
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val date = dateFormat.format(calendar.time)
 
-            //InputData
-            val crime = inputCrime.text.toString()
-            val time: Int = inputTime.text.toString().toInt()
+            //time
+            val timeFormat = SimpleDateFormat("HH")
+            val time = timeFormat.format(calendar.time)
 
             //Location
             val lat = location!!.latitude
@@ -147,9 +131,10 @@ class CrimeReportFragment : Fragment() {
             //SendData
             crimeReportViewModel.uploadCrimeReport(crimeJsonObject)
 
-            Log.e( "uploadReport: ", crimeJsonObject.toString())
+            //Log.e( "uploadReport: ", crimeJsonObject.toString())
             Toast.makeText(requireContext(), "Laporan terkirim! Selalu waspada & berhati-hati!", Toast.LENGTH_SHORT).show()
             //val snackbar = Snackbar.make(activity.findViewById(R.id.),"Laporan terkirim! Selalu waspada & berhati-hati!", Snackbar.LENGTH_SHORT)
+
         }
     }
 
@@ -181,11 +166,28 @@ class CrimeReportFragment : Fragment() {
     }
 
 
+    private fun setupObserver() {
+        crimeReportViewModel.reportResponse.observe(requireActivity()){response ->
+            when(response) {
+                is Result.Loading -> {
+
+                }
+                is Result.Success -> {
+                    Toast.makeText(requireContext(), "Berhasil", Toast.LENGTH_SHORT).show()
+                }
+                is Result.Error -> {
+
+                }
+            }
+        }
+    }
 
     companion object {
         fun newInstance() = CrimeReportFragment().apply {
             arguments = Bundle().apply { }
         }
     }
+
+
 
 }
