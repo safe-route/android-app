@@ -40,6 +40,7 @@
     <style name="Text.Heading2.StateDanger">
         <item name="fontFamily">@font/product_sans_regular</item>
         <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <!--  Divider  -->

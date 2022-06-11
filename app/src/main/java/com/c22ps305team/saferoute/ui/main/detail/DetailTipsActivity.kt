@@ -2,7 +2,6 @@ package com.c22ps305team.saferoute.ui.main.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.c22ps305team.saferoute.data.InfoTips
 import com.c22ps305team.saferoute.databinding.ActivityDetailTipsBinding
@@ -18,21 +17,16 @@ class DetailTipsActivity : AppCompatActivity() {
 
 
         setupContent()
-
     }
 
     private fun setupContent() {
-
         val data = intent.getParcelableExtra<InfoTips>(EXTRA_TIPS) as InfoTips
-        //Log.e("onCreate: ", data.toString() )
-
         binding.apply {
             Glide.with(this@DetailTipsActivity).load(data.photo).into(ivTips)
             tvTittle.text = data.tittle
             tvContent.text = data.content
             tvSource.text = data.source
         }
-
     }
 
 

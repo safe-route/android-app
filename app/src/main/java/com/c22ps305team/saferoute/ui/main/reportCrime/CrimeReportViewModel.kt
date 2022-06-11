@@ -19,7 +19,7 @@ class CrimeReportViewModel(private val userRepository: UserRepository): ViewMode
         viewModelScope.launch {
             _reportResponse.value = Result.Loading()
             try {
-                val response = userRepository.uploadCrimeReport(report)
+                userRepository.uploadCrimeReport(report)
                 //_reportResponse.value = Result.Success(response)
                 //Log.e( "uploadCrimeReport: ", response.body()!!.toString() )
             } catch (e: Exception){

@@ -105,7 +105,8 @@ class HomeFragment : Fragment() {
                     val lat = currentLocation.latitude
                     val long = currentLocation.longitude
                     //Log.e("getCurrentLocation: ", " lat = $lat long = $long" )
-                    //PERBAIKI KETIKA LATLONG == NULL getCityName(lat, long)
+                    //PERBAIKI KETIKA LATLONG == NULL
+                    getCityName(lat, long)
                 } else {
                     Toast.makeText(requireContext(), "Nyalakan location!!", Toast.LENGTH_SHORT).show()
                 }
@@ -121,7 +122,7 @@ class HomeFragment : Fragment() {
         val address = geoCoder.getFromLocation(lat, long, 1)
         val cityName: String = address[0].locality
 
-        //binding.tvAreaName.text = cityName
+        binding.tvAreaName.text = cityName
         //Log.e("getCityName: ", cityName)
     }
 
@@ -129,7 +130,6 @@ class HomeFragment : Fragment() {
     private fun setupTipsInfo(){
         listInfoTips = arrayListOf()
         listInfoTips.addAll(InfoTipsData.listData)
-        Log.e("setupTipsInfo: ", InfoTipsData.listData.toString() )
         tipsInfoAdapter = TipsInfoAdapter(listInfoTips)
 
         binding.rvTips.apply {
@@ -169,7 +169,6 @@ class HomeFragment : Fragment() {
 
 
         eventChangeListener()
-
     }
 
 

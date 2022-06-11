@@ -42,8 +42,27 @@
     <string name="chose_info">Pilih informasi</string>
     <string name="danger_area">Titik Berbahaya</string>
     <string name="districts_info">Info Kecamatan</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string-array name="typeCrime">
+        <item>Accidental Burning</item>
+        <item>Demonstration</item>
+        <item>Destruction</item>
+        <item>Drugs</item>
+        <item>Fencing</item>
+        <item>Fraud</item>
+        <item>Kidnapping</item>
+        <item>Mild Persecution</item>
+        <item>Minor Theft</item>
+        <item>Murder</item>
+        <item>Ordinary Theft</item>
+        <item>Potent drug</item>
+        <item>Rape</item>
+        <item>Severe Persecution</item>
+        <item>Theft in the Family</item>
+        <item>Vehicle Theft</item>
+        <item>Violent Theft</item>
+        <item>Weighted Theft</item>
+    </string-array>
 
 </resources>

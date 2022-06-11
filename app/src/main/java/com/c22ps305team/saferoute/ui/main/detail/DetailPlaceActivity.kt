@@ -2,6 +2,7 @@ package com.c22ps305team.saferoute.ui.main.detail
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c22ps305team.saferoute.data.Statistic
@@ -18,6 +19,7 @@ class DetailPlaceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPlaceBinding
     private lateinit var barChart: BarChart
 
+    var dataKey: List<String>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +36,16 @@ class DetailPlaceActivity : AppCompatActivity() {
     private fun showBarChart() {
         val data = intent.getParcelableExtra<Statistic>(EXTRA_STATS) as Statistic
         val dataCrime: MutableMap<String, Int> = data.crime_info!!
+        //Log.e( "data", dataCrime.toString())
 
         //sort data
-        val sortedData = dataCrime.toSortedMap(compareByDescending { it })
+        val sortedData = dataCrime.toSortedMap(compareBy{it})
         //Log.e( "sorted data", sortedData.toString())
 
         //val dataKey: List<String> = data.crime_info!!.toList().map { it.first}
+        dataKey = data.crime_info!!.toList().map { it.first}
+
+
         val dataValue: List<String> = sortedData.toList().map { "${it.second}"}
         //Log.e("dataValue ", dataValue.toString())
 
