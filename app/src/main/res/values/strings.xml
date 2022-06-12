@@ -1,3 +1,67 @@
 <resources>
     <string name="app_name">Safe Route</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_report">Report</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_map">Map</string>
+
+
+    <string name="safe_state_text">Kamu berada di daerah yang aman</string>
+
+    <string name="safe_state">Aman</string>
+    <string name="danger_state">Berbahaya</string>
+
+    <string name="area">Daerah</string>
+
+    <string name="tips_info">Tips</string>
+    <string name="total_crime">Total Crime</string>
+    <string name="jakarta_pusat">Jakarta Pusat</string>
+    <string name="jakarta_selatan">Jakarta Selatan</string>
+    <string name="state_percentage">60%</string>
+
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</string>
+
+
+    <string name="notif_info">Opp’s, Maaf internet mu mengalami gangguan</string>
+    <string name="retry">Coba Lagi</string>
+    <string name="ic_remove">ic_remove</string>
+    <string name="title_activity_make_route">MakeRouteActivity</string>
+    <string name="where_you_go">Mau pergi kemana kamu?</string>
+    <string name="origin_place">Tempat asal</string>
+    <string name="destination_place">Tujuan</string>
+    <string name="select_via_map">Pilih lewat map</string>
+    <string name="be_alert">Selalu waspada ketika bepergian</string>
+    <string name="place_name">Central Park</string>
+    <string name="place_detail">Jl. Samberembe, Bulus II, Pakem, Jakarta, Indonesia</string>
+    <string name="pick_current_location">Pilih lokasi saat ini</string>
+    <string name="chose_info">Pilih informasi</string>
+    <string name="danger_area">Titik Berbahaya</string>
+    <string name="districts_info">Info Kecamatan</string>
+    <string name="start_journey">Mulai Perjalanan</string>
+    <string name="statistic_crime_info">Crime Infro</string>
+    <string name="latest_info">Latest Info</string>
+
+
+    <string-array name="typeCrime">
+        <item>Accidental Burning</item>
+        <item>Demonstration</item>
+        <item>Destruction</item>
+        <item>Drugs</item>
+        <item>Fencing</item>
+        <item>Fraud</item>
+        <item>Kidnapping</item>
+        <item>Mild Persecution</item>
+        <item>Minor Theft</item>
+        <item>Murder</item>
+        <item>Ordinary Theft</item>
+        <item>Potent drug</item>
+        <item>Rape</item>
+        <item>Severe Persecution</item>
+        <item>Theft in the Family</item>
+        <item>Vehicle Theft</item>
+        <item>Violent Theft</item>
+        <item>Weighted Theft</item>
+    </string-array>
+
 </resources>

@@ -1,0 +1,41 @@
+[33mcommit f4541d342d901d32c6b9c7be64edfc50927f017e[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 12:38:27 2022 +0700
+
+    refactor main activity
+
+[33mcommit 5b18a455756578eae46b44bf74daa89387bf24f8[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 09:52:28 2022 +0700
+
+    assign login and register activity
+
+[33mcommit caec432404d86fad448927d676a975673d1e80a3[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 09:51:41 2022 +0700
+
+    make login activity
+
+[33mcommit b1732fe27bcdeb5ce56185775378d2a90218a1c0[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 09:51:28 2022 +0700
+
+    make register activity
+
+[33mcommit 412607ad76efc479ca53cbb6d376ef552bb40bd6[m[33m ([m[1;32mmain[m[33m)[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 09:49:04 2022 +0700
+
+    change app and project name
+
+[33mcommit 01c196c6109a4748996ee7564a98fe083708cfe3[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 07:49:23 2022 +0700
+
+    Add Retrofit HTTP Client
+
+[33mcommit 3ae8f1f04aa643a8080671eee4e9b2f6c1b9eded[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Fillah Firdausyah <fillahfirdausyah22@gmail.com>
+Date:   Tue May 17 07:35:14 2022 +0700
+
+    init project

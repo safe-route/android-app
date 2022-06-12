@@ -1,5 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.37604166666666666" />
+        <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_dropdown_item.xml" value="0.16188524590163936" />
+        <entry key="../../Android/Sdk/platforms/android-32/data/res/layout/simple_spinner_item.xml" value="0.23194444444444445" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_circle_radius.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_input.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_map_bottom_sheet.xml" value="0.1565" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_safe_state.xml" value="0.1565" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_select_map.xml" value="0.13333333333333333" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/bg_select_map_active.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/btn_select_map_state.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/btn_toolbar_state.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_arrow_left.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_home.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_line.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_location_marker_30.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_navigation.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_notification_active.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/drawable/ic_user.xml" value="0.153" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_bottom_nav.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_make_route.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_maps.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/area_info.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_notifications.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/item_area_info.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/item_crime_info.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/item_crime_info_bottom_sheet.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/item_place.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/item_tips.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/make_route_bottom_sheet.xml" value="0.22" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/map_bottom_sheet.xml" value="0.22" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/shimer_map_bottom_sheet.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/layout/shimer_placeholder.xml" value="0.2" />
+        <entry key="..\:/Users/filla/Documents/Amikom/Bangkit2022/Kegiatan/Tech Skill/Capstone/SafeRoute/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/bg_border.xml" value="0.181" />
+        <entry key="app/src/main/res/drawable/bg_circle.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/bg_circle_radius.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/bg_input.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/bg_safe_state.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/bg_top_corner.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/border.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/btn_select_map_state.xml" value="0.293" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_line.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_map_location.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_notification_active.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_stack.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_user.xml" value="0.261" />
+        <entry key="app/src/main/res/layout/activity_detail_place.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_detail_tips.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/area_info.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.23194444444444445" />
+        <entry key="app/src/main/res/layout/fragment_crime_report.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_area_info.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_crime_info.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_place.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_tips.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/itwm_crime_info.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.34791666666666665" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
