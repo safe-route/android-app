@@ -93,7 +93,7 @@ class DetailPlaceActivity : AppCompatActivity() {
 
     private fun initBarDataSet(barDataSet: BarDataSet) {
         //Changing the color of the bar
-        barDataSet.color = Color.parseColor("#34cfeb") //#304567
+        barDataSet.color = Color.parseColor("#304567") //#34cfeb
         //Setting the size of the form in the legend
         barDataSet.formSize = 15f
         //showing the value of the bar, default true if not set
