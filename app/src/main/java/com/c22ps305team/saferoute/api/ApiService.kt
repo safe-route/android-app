@@ -63,4 +63,26 @@ interface ApiService {
         @Body areaName: JsonObject
     ): Call<AreaStatisticResponse>
 
+    // Create Model
+    @GET("/create")
+    fun createModel(
+        @Query("username") username: String
+    ): Call<String>
+
+
+    // Training Model
+    @POST("/train")
+    fun trainModel(
+        @Query("username") username: String,
+        @Body dataTraining: JsonObject
+    ): Call<String>
+
+    // Forecasting
+    @POST("/forecast")
+    fun foreCast(
+        @Query("username") username: String,
+        @Body dataForecast: JsonObject
+    ): Call<String>
+
+
 }
