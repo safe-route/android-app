@@ -14,7 +14,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/bannerArea"
             android:layout_width="350dp"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:orientation="horizontal"
             app:cardCornerRadius="12dp"
             android:layout_marginTop="10dp"
@@ -44,9 +44,9 @@
                 <ImageView
                     android:id="@+id/ivSafe"
                     android:layout_width="119dp"
-                    android:layout_height="153dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="15dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="10dp"
                     android:contentDescription="@string/safe_state"
                     android:src="@drawable/i_safe"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -56,24 +56,26 @@
                     android:id="@+id/iconArea"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="30dp"
                     android:contentDescription="@string/area"
                     android:src="@drawable/icon_loc"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDescArea"/>
 
                 <TextView
                     android:id="@+id/tvAreaName"
                     style="@style/PlaceName"
-                    android:layout_width="150dp"
-                    android:layout_height="30dp"
-                    android:padding="5dp"
-                    tools:text="@string/jakarta_selatan"
-                    android:lines="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/iconArea"
-                    app:layout_constraintStart_toEndOf="@id/iconArea"
-                    app:layout_constraintTop_toTopOf="@+id/iconArea" />
+                    app:layout_constraintStart_toEndOf="@+id/iconArea"
+                    app:layout_constraintTop_toTopOf="@+id/iconArea"
+                    tools:text="Kecamatan lorem ipsum dollor sita" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

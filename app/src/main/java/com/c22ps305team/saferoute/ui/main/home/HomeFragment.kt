@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     private lateinit var tipsInfoAdapter: TipsInfoAdapter
     private lateinit var listInfoTips: ArrayList<InfoTips>
 
-
+    //private lateinit var cityName: String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -63,13 +63,15 @@ class HomeFragment : Fragment() {
         setupObserver()*/
 
 
+        getCurrentLocation()
+
+
+
+        setupPlaceInfo()
+        setupTipsInfo()
 
         setupBanner()
-        //getCurrentLocation()
 
-
-        //setupPlaceInfo()
-        setupTipsInfo()
 
     }
 
@@ -78,7 +80,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        //getCurrentLocation()
+        getCurrentLocation()
     }
 
     override fun onDestroyView() {
@@ -108,7 +110,7 @@ class HomeFragment : Fragment() {
                     //PERBAIKI KETIKA LATLONG == NULL
                     getCityName(lat, long)
                 } else {
-                    Toast.makeText(requireContext(), "Nyalakan location!!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Turn on your location!!", Toast.LENGTH_SHORT).show()
                 }
             }
         } else {
@@ -120,8 +122,9 @@ class HomeFragment : Fragment() {
     private fun getCityName(lat: Double, long: Double) {
         val geoCoder = Geocoder(requireContext().applicationContext, Locale.getDefault())
         val address = geoCoder.getFromLocation(lat, long, 1)
-        val cityName: String = address[0].locality
+        val cityName = address[0].locality
 
+        //cityName.replace("Kecamatan",".")
         binding.tvAreaName.text = cityName
         //Log.e("getCityName: ", cityName)
     }
@@ -167,7 +170,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-
         eventChangeListener()
     }
 
@@ -196,9 +198,9 @@ class HomeFragment : Fragment() {
         val banner = binding.bannerArea
         banner.setCardBackgroundColor(Color.parseColor("#9AEFD3"))
 
-        /*val area = binding.tvAreaName
-        val description = binding.tvDescArea
-        val image = binding.ivSafe*/
+        //binding.tvAreaName.text = cityName
+        //val description = binding.tvDescArea
+        //val image = binding.ivSafe
     }
 
 

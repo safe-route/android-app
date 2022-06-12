@@ -65,7 +65,7 @@
         <entry key="app/src/main/res/layout/area_info.xml" value="0.67" />
         <entry key="app/src/main/res/layout/dropdown_item.xml" value="0.23194444444444445" />
         <entry key="app/src/main/res/layout/fragment_crime_report.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.10555555555555556" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.23194444444444445" />
         <entry key="app/src/main/res/layout/item_area_info.xml" value="0.22" />
