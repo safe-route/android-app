@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.c22ps305team.saferoute.databinding.FragmentProfileBinding
 import com.c22ps305team.saferoute.ui.auth.login.LoginActivity
 import com.c22ps305team.saferoute.utils.ViewModelFactory

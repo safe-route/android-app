@@ -2,9 +2,9 @@ package com.c22ps305team.saferoute.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import com.c22ps305team.saferoute.database.DataRoomDatabase
 import com.c22ps305team.saferoute.database.dataPredict.DataPredict
 import com.c22ps305team.saferoute.database.dataPredict.DataPredictDao
-import com.c22ps305team.saferoute.database.DataRoomDatabase
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 

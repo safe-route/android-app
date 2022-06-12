@@ -1,6 +1,5 @@
 package com.c22ps305team.saferoute.ui.main.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

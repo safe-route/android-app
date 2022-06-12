@@ -1,7 +1,6 @@
 package com.c22ps305team.saferoute.api
 
 import com.c22ps305team.saferoute.data.*
-import com.c22ps305team.saferoute.data.auth.AuthRequest
 import com.c22ps305team.saferoute.data.auth.LoginResponse
 import com.c22ps305team.saferoute.data.auth.SignUpResponse
 import com.google.gson.JsonObject

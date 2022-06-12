@@ -10,12 +10,10 @@ import com.c22ps305team.saferoute.di.Injection
 import com.c22ps305team.saferoute.repository.UserAuthRepository
 import com.c22ps305team.saferoute.repository.UserRepository
 import com.c22ps305team.saferoute.ui.auth.login.LoginViewModel
-import com.c22ps305team.saferoute.ui.auth.register.RegisterActivity
 import com.c22ps305team.saferoute.ui.auth.register.RegisterViewModel
 import com.c22ps305team.saferoute.ui.main.profile.ProfileViewModel
 import com.c22ps305team.saferoute.ui.main.reportCrime.CrimeReportViewModel
 import com.c22ps305team.saferoute.ui.splash.SplashViewModel
-import java.lang.IllegalArgumentException
 
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_account")

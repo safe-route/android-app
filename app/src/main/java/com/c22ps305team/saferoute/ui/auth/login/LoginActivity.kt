@@ -2,12 +2,10 @@ package com.c22ps305team.saferoute.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.c22ps305team.saferoute.data.auth.AuthRequest
 import com.c22ps305team.saferoute.data.auth.LoginResponse
 import com.c22ps305team.saferoute.databinding.ActivityLoginBinding
 import com.c22ps305team.saferoute.ui.auth.register.RegisterActivity

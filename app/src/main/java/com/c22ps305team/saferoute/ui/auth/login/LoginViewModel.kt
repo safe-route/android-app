@@ -5,8 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.c22ps305team.saferoute.api.ApiAuthConfig
-import com.c22ps305team.saferoute.data.auth.AuthRequest
 import com.c22ps305team.saferoute.data.auth.LoginResponse
 import com.c22ps305team.saferoute.repository.UserAuthRepository
 import com.c22ps305team.saferoute.utils.Result

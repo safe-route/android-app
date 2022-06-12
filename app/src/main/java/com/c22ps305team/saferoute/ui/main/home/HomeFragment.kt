@@ -3,6 +3,7 @@ package com.c22ps305team.saferoute.ui.main.home
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
@@ -20,11 +21,14 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.c22ps305team.saferoute.data.InfoTips
+import com.c22ps305team.saferoute.data.InfoTipsData
 import com.c22ps305team.saferoute.data.Statistic
 import com.c22ps305team.saferoute.database.dataPredict.DataPredict
 import com.c22ps305team.saferoute.database.dataTraining.DataTraining
 import com.c22ps305team.saferoute.databinding.FragmentHomeBinding
 import com.c22ps305team.saferoute.ui.main.detail.DetailPlaceActivity
+import com.c22ps305team.saferoute.ui.main.detail.DetailTipsActivity
 import com.c22ps305team.saferoute.ui.main.makeRoute.MakeRouteActivity
 import com.c22ps305team.saferoute.utils.DateUtils
 import com.c22ps305team.saferoute.utils.RoomViewModelFactory
@@ -34,9 +38,9 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
-import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
@@ -52,6 +56,10 @@ class HomeFragment : Fragment() {
 
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var tipsInfoAdapter: TipsInfoAdapter
+    private lateinit var listInfoTips: ArrayList<InfoTips>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +78,6 @@ class HomeFragment : Fragment() {
         homeViewModel = obtainViewModel(requireActivity())
         homeViewModel.createModel("userTest")
 
-
         doStreamDataTraining()
         getCurrentLocation()
         createLocationRequest()
@@ -79,6 +86,12 @@ class HomeFragment : Fragment() {
 
         setupPlaceInfo()
     }
+
+    private fun setupBanner() {
+        val banner = binding.bannerArea
+        banner.setCardBackgroundColor(Color.parseColor("#9AEFD3"))
+    }
+
 
     private fun doStreamDataTraining() {
         var data = JsonArray()
@@ -140,6 +153,8 @@ class HomeFragment : Fragment() {
         createLocationRequest()
         createLocationCallBack()
         startLocationUpdates()
+        setupBanner()
+        setupTipsInfo()
     }
 
     override fun onDestroyView() {
@@ -188,6 +203,27 @@ class HomeFragment : Fragment() {
         val geoCoder = Geocoder(requireContext().applicationContext, Locale.getDefault())
         val address = geoCoder.getFromLocation(lat, long, 1)
         val cityName: String = address[0].locality
+    }
+
+    private fun setupTipsInfo() {
+        listInfoTips = arrayListOf()
+        listInfoTips.addAll(InfoTipsData.listData)
+        Log.e("setupTipsInfo: ", InfoTipsData.listData.toString())
+        tipsInfoAdapter = TipsInfoAdapter(listInfoTips)
+
+        binding.rvTips.apply {
+            adapter = tipsInfoAdapter
+            layoutManager =
+                LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
+        tipsInfoAdapter.setOnItemClickCallback(object : TipsInfoAdapter.OnItemClickCallback {
+            override fun onItemClicked(infoTips: InfoTips) {
+                val intent = Intent(requireContext(), DetailTipsActivity::class.java)
+                intent.putExtra(DetailTipsActivity.EXTRA_TIPS, infoTips)
+                startActivity(intent)
+            }
+        })
     }
 
 

@@ -2,10 +2,8 @@ package com.c22ps305team.saferoute.ui.auth.register
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.c22ps305team.saferoute.data.auth.AuthRequest
 import com.c22ps305team.saferoute.databinding.ActivityRegisterBinding
 import com.c22ps305team.saferoute.utils.Result
 import com.c22ps305team.saferoute.utils.ViewModelFactory

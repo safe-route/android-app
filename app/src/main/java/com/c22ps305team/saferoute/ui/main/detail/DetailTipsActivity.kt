@@ -1,7 +1,7 @@
 package com.c22ps305team.saferoute.ui.main.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.c22ps305team.saferoute.data.InfoTips
 import com.c22ps305team.saferoute.databinding.ActivityDetailTipsBinding
