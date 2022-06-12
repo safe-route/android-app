@@ -1,4 +1,4 @@
-package com.c22ps305team.saferoute.database
+package com.c22ps305team.saferoute.database.dataPredict
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class UserData(
+data class DataPredict(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0,

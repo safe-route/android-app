@@ -13,12 +13,13 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceInfoViewHolder {
-        val binding = ItemAreaInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemAreaInfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlaceInfoViewHolder(binding)
     }
 
@@ -29,16 +30,12 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
     override fun getItemCount() = listPlaceInfo.size
 
 
-    inner class PlaceInfoViewHolder(var binding: ItemAreaInfoBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(listStatistic: Statistic){
+    inner class PlaceInfoViewHolder(var binding: ItemAreaInfoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(listStatistic: Statistic) {
             binding.apply {
                 tvAreaName.text = listStatistic.subdistrict
                 tvStatePercentage.text = listStatistic.total_crime.toString()
-
-                /*val theft = listStatistic.crime_info.["Theft"] ?: ""
-                tvCurrentInfo.text = "Theft: " +theft*/
-
-                //Log.e("list data", listStatistic.toString())
             }
             binding.root.setOnClickListener {
                 onItemClickCallback.onItemClicked(listStatistic)
@@ -50,7 +47,6 @@ class PlaceInfoAdapter(private val listPlaceInfo: List<Statistic>) :
     interface OnItemClickCallback {
         fun onItemClicked(statistic: Statistic)
     }
-
 
 
 }

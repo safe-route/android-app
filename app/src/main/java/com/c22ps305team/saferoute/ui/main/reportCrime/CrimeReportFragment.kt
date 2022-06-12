@@ -22,9 +22,12 @@ import com.c22ps305team.saferoute.utils.Result
 import com.c22ps305team.saferoute.utils.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CrimeReportFragment : Fragment() {
     private var _binding: FragmentCrimeReportBinding? = null
@@ -40,7 +43,11 @@ class CrimeReportFragment : Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         _binding = FragmentCrimeReportBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -53,12 +60,19 @@ class CrimeReportFragment : Fragment() {
         //SpinnerCrime
         val inputCrime = resources.getStringArray(R.array.typeCrime)
         val spinner = binding.inputCrime
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, inputCrime)
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, inputCrime)
         spinner.adapter = adapter
-        spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 crime = inputCrime[position]
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -70,8 +84,8 @@ class CrimeReportFragment : Fragment() {
 
 
     private fun setupListener() {
-        binding.switchLoc.setOnCheckedChangeListener{ _, isChecked ->
-            if (isChecked){
+        binding.switchLoc.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
                 getCurrentLocation()
             } else {
                 this.location = null
@@ -88,18 +102,18 @@ class CrimeReportFragment : Fragment() {
     }
 
 
-    private fun uploadReport(){
+    private fun uploadReport() {
         val shareLoc = binding.switchLoc.isChecked
         var isValid = true
 
 
-        if (!shareLoc){
+        if (!shareLoc) {
             isValid = false
             Toast.makeText(requireContext(), "Aktifkan Lokasi", Toast.LENGTH_SHORT).show()
         }
 
 
-        if (isValid){
+        if (isValid) {
             //Date
             val calendar = Calendar.getInstance().time
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
@@ -114,8 +128,13 @@ class CrimeReportFragment : Fragment() {
             val lon = location!!.longitude
 
             //Districts
-            val address = Geocoder(requireContext().applicationContext, Locale.getDefault()).getFromLocation(lat, lon, 1)
-            val  districts: String = address[0].subAdminArea
+            val address =
+                Geocoder(requireContext().applicationContext, Locale.getDefault()).getFromLocation(
+                    lat,
+                    lon,
+                    1
+                )
+            val districts: String = address[0].subAdminArea
             val subdistrict: String = address[0].locality
 
             //JsonObject
@@ -124,17 +143,17 @@ class CrimeReportFragment : Fragment() {
             crimeJsonObject.addProperty("time", time)
             crimeJsonObject.addProperty("latitude", lat)
             crimeJsonObject.addProperty("longitude", lon)
-            crimeJsonObject.addProperty("districts", districts.replace(' ','_'))
-            crimeJsonObject.addProperty("subdistrict", subdistrict.replace(' ','_'))
+            crimeJsonObject.addProperty("districts", districts.replace(' ', '_'))
+            crimeJsonObject.addProperty("subdistrict", subdistrict.replace(' ', '_'))
             crimeJsonObject.addProperty("type", crime)
-
             //SendData
             crimeReportViewModel.uploadCrimeReport(crimeJsonObject)
 
-            //Log.e( "uploadReport: ", crimeJsonObject.toString())
-            Toast.makeText(requireContext(), "Report has been sent! Always beware and carefully!", Toast.LENGTH_SHORT).show()
-            //val snackbar = Snackbar.make(activity.findViewById(R.id.),"Laporan terkirim! Selalu waspada & berhati-hati!", Snackbar.LENGTH_SHORT)
-
+            Toast.makeText(
+                requireContext(),
+                "Laporan terkirim! Selalu waspada & berhati-hati!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -142,21 +161,25 @@ class CrimeReportFragment : Fragment() {
     private val requestPermissionLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestPermission()
-        ){ isGranted ->
-            if (isGranted){
+        ) { isGranted ->
+            if (isGranted) {
                 getCurrentLocation()
             }
         }
 
 
-    private fun getCurrentLocation(){
-        if (ContextCompat.checkSelfPermission(requireContext().applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
+    private fun getCurrentLocation() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext().applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) ==
+            PackageManager.PERMISSION_GRANTED
+        ) {
             fusedLocationClient.lastLocation.addOnSuccessListener { currentLocation ->
-                if (currentLocation != null){
+                if (currentLocation != null) {
                     this.location = currentLocation
                 } else {
-                    Toast.makeText(requireContext(), "Turn on your location!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Nyalakan Lokasi", Toast.LENGTH_SHORT).show()
                     binding.switchLoc.isChecked = false
                 }
             }
@@ -167,8 +190,8 @@ class CrimeReportFragment : Fragment() {
 
 
     private fun setupObserver() {
-        crimeReportViewModel.reportResponse.observe(requireActivity()){response ->
-            when(response) {
+        crimeReportViewModel.reportResponse.observe(requireActivity()) { response ->
+            when (response) {
                 is Result.Loading -> {
 
                 }
@@ -187,7 +210,6 @@ class CrimeReportFragment : Fragment() {
             arguments = Bundle().apply { }
         }
     }
-
 
 
 }

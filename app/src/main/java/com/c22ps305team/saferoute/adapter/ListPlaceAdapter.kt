@@ -8,7 +8,7 @@ import com.c22ps305team.saferoute.databinding.ItemPlaceBinding
 
 class ListPlaceAdapter(
     private val listPlace: List<ResultsItem>,
-    val itemClick: (List<ResultsItem>) -> Unit
+    val itemClick: (ResultsItem) -> Unit
 ) :
     RecyclerView.Adapter<ListPlaceAdapter.ViewHolder>() {
 
@@ -22,7 +22,7 @@ class ListPlaceAdapter(
         holder.binding.tvPlaceName.text = listPlace[position].name
         holder.binding.tvPlaceDetail.text = listPlace[position].formattedAddress
         holder.itemView.setOnClickListener {
-            itemClick(listPlace)
+            itemClick(listPlace[position])
         }
     }
 
