@@ -23,7 +23,7 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -37,7 +37,8 @@ class ProfileFragment : Fragment() {
     private fun setupListener() {
         binding.btnLogout.setOnClickListener {
             viewModel.deleteUser()
-            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            val intent = Intent(this@ProfileFragment.requireContext(), LoginActivity::class.java)
+            startActivity(intent)
             activity?.finish()
         }
     }

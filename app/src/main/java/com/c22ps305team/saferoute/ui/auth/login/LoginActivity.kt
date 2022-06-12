@@ -3,6 +3,8 @@ package com.c22ps305team.saferoute.ui.auth.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.c22ps305team.saferoute.data.auth.AuthRequest
@@ -12,10 +14,13 @@ import com.c22ps305team.saferoute.ui.auth.register.RegisterActivity
 import com.c22ps305team.saferoute.ui.main.MainActivity
 import com.c22ps305team.saferoute.utils.Result
 import com.c22ps305team.saferoute.utils.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    private lateinit var username: String
 
     private val loginViewModel: LoginViewModel by viewModels(){
         ViewModelFactory.getInstance(this)
@@ -32,14 +37,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupListener() {
         binding.buttonSubmit.setOnClickListener {
-            val username = binding.edtUsername.text.toString().trim()
+            username = binding.edtUsername.text.toString().trim()
             val password = binding.edtPassword.text.toString().trim()
             when {
                 username.isEmpty() -> {
-                    //error("Must Be Filled!")
+                    setUsernameError("Username must be filled!")
                 }
                 password.length < 3 -> {
-                    //error("Password is not valid")
+                    setPasswordError("Password must be filled")
                 }
                 else -> {
                     //val login = AuthRequest(username, password)
@@ -53,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
+
 
     private fun setupObserver() {
         loginViewModel.loginResponse.observe(this) { loginResponse ->
@@ -73,18 +79,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onLoading(isLoading: Boolean) {
-        /*if (isLoading){
+        if (isLoading){
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
-        }*/
+        }
     }
 
     private fun onSuccess(loginResponse: LoginResponse) {
         val userData = loginResponse.token
         loginViewModel.saveToken(userData)
-        //Toast.makeText(this, getString(R.string.login_success, loginResult.name), Toast.LENGTH_LONG).show()
-        Log.e( "onSuccess: ", userData )
+        Toast.makeText(this,"Welcome $username!", Toast.LENGTH_LONG).show()
+
+        //Log.e( "onSuccess: ", userData )
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.putExtra(MainActivity.EXTRA_USER, userData)
         startActivity(intent)
@@ -92,8 +99,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun onFailed() {
-        //Snackbar.make(binding.root, getString(R.string.login_failed), Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.root, "Cek again your username & password!", Snackbar.LENGTH_LONG).show()
     }
 
+    private fun setUsernameError(e : String?){
+        binding.edtUsername.error = e
+    }
+
+    private fun setPasswordError(e: String?){
+        binding.edtPassword.error = e
+    }
 
 }

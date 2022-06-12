@@ -1,6 +1,7 @@
 package com.c22ps305team.saferoute.ui.auth.register
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,31 +31,29 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun setupListener() {
+
         binding.buttonSubmit.setOnClickListener {
             val username = binding.edtUsername.text.toString().trim()
             val password = binding.edtPassword.text.toString().trim()
 
-
-            regViewModel.register(username, password)
-
             when{
                 username.isEmpty() -> {
-                    //error("Must Be Filled")
+                    setUsernameError("Username must be filled!")
                 }
                 password.length < 3 -> {
-                    //error("password is not valid")
+                    setPasswordError("Password must be filled!")
                 }
                 else -> {
                     //val register = AuthRequest(username, password)
-
+                    regViewModel.register(username, password)
                 }
             }
-
         }
+
     }
 
     private fun setupObserver() {
-       /* regViewModel.registerResponse.observe(this){ registerResponse ->
+        regViewModel.registerResponse.observe(this){ registerResponse ->
             when(registerResponse) {
                 is Result.Loading -> {
                     onLoading(true)
@@ -69,26 +68,35 @@ class RegisterActivity : AppCompatActivity() {
                     onFailed()
                 }
             }
-        }*/
+        }
     }
 
 
     private fun onLoading(isLoading: Boolean) {
-        /*if (isLoading){
+        if (isLoading){
             binding.progressBar.visibility = View.VISIBLE
         } else {
             binding.progressBar.visibility = View.GONE
-        }*/
+        }
     }
 
     private fun onSuccess() {
-        //Snackbar.make(binding.root, "Register Success", Snackbar.LENGTH_LONG).show()
-        Toast.makeText(this, "Register Success!", Toast.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, "Register Success!", Snackbar.LENGTH_LONG).show()
+        //Toast.makeText(this, "Register Success!", Toast.LENGTH_SHORT).show()
     }
 
     private fun onFailed() {
-        //Snackbar.make(binding.root, "Register Failed", Snackbar.LENGTH_LONG).show()
-        Toast.makeText(this, "Register Failed!", Toast.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, "Register Failed!", Snackbar.LENGTH_LONG).show()
+        //Toast.makeText(this, "Register Failed!", Toast.LENGTH_SHORT).show()
+    }
+
+
+    private fun setUsernameError(e : String?){
+        binding.edtUsername.error = e
+    }
+
+    private fun setPasswordError(e: String?){
+        binding.edtPassword.error = e
     }
 
 }

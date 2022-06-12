@@ -34,6 +34,9 @@ class RegisterViewModel(private val repository: UserAuthRepository): ViewModel()
         }
     }
 
+}
+
+
     /*fun register(username: String, password: String){
         val client = ApiAuthConfig.getApiService().register(username, password)
         client.enqueue(object : Callback<SignUpResponse> {
@@ -56,6 +59,3 @@ class RegisterViewModel(private val repository: UserAuthRepository): ViewModel()
 
     }*/
 
-
-
-}

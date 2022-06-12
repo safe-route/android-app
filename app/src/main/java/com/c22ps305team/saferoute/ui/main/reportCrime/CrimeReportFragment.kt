@@ -132,7 +132,7 @@ class CrimeReportFragment : Fragment() {
             crimeReportViewModel.uploadCrimeReport(crimeJsonObject)
 
             //Log.e( "uploadReport: ", crimeJsonObject.toString())
-            Toast.makeText(requireContext(), "Laporan terkirim! Selalu waspada & berhati-hati!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Report has been sent! Always beware and carefully!", Toast.LENGTH_SHORT).show()
             //val snackbar = Snackbar.make(activity.findViewById(R.id.),"Laporan terkirim! Selalu waspada & berhati-hati!", Snackbar.LENGTH_SHORT)
 
         }
@@ -156,7 +156,7 @@ class CrimeReportFragment : Fragment() {
                 if (currentLocation != null){
                     this.location = currentLocation
                 } else {
-                    Toast.makeText(requireContext(), "Nyalakan Lokasi", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Turn on your location!", Toast.LENGTH_SHORT).show()
                     binding.switchLoc.isChecked = false
                 }
             }
