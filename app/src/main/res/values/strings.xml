@@ -13,7 +13,6 @@
     <string name="danger_state">Berbahaya</string>
 
     <string name="area">Daerah</string>
-    <string name="area_info">Info Daerah</string>
 
     <string name="tips_info">Tips</string>
     <string name="total_crime">Total Crime</string>
@@ -29,9 +28,6 @@
     <string name="ic_remove">ic_remove</string>
     <string name="title_activity_make_route">MakeRouteActivity</string>
     <string name="where_you_go">Mau pergi kemana kamu?</string>
-    <string name="ic_map_location">ic_map_location</string>
-    <string name="ic_lcoation_question">ic_lcoation_question</string>
-    <string name="ic_sort">ic_sort</string>
     <string name="origin_place">Tempat asal</string>
     <string name="destination_place">Tujuan</string>
     <string name="select_via_map">Pilih lewat map</string>
@@ -43,8 +39,6 @@
     <string name="danger_area">Titik Berbahaya</string>
     <string name="districts_info">Info Kecamatan</string>
     <string name="start_journey">Mulai Perjalanan</string>
-    <string name="murder">Murder</string>
-    <string name="zero">0</string>
     <string name="statistic_crime_info">Crime Infro</string>
     <string name="latest_info">Latest Info</string>
 
