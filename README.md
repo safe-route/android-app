@@ -1,13 +1,15 @@
 # Safe Route - Android App
 
-Safe route android app build with kotlin to comunicate with our technology that we buil
+Safe route android app build with kotlin to comunicate with our technology
 
 ## Overview
 
 - [Library](#library)
 - [Installation](#installation)
 - [Structur](#structur)
+- [Architecture Pattern](#mvvm-architecture-pattern)
 - [Api](#api)
+- [Feature](#feature)
 - [Known Issue](#known-issue)
 - [Reference](#reference)
 
@@ -33,15 +35,36 @@ then sync the Graddle or Build > Rebuild Project
 
 ## Structur
 
-No definite structure for this project, this is just basic Android Project Structure.
+No definite structure for this project, this is just basic Android Project Structure. go to `mainpackage`.
 to access the google maps service, Edit `AndroidManifest.xml` and then place your Google Map Api Key. and also place your Google Map Api Key to this line code `buildConfigField("String", "API_KEY", '"PlAcEYouRAPIkeYHeRE"')` in the Graddle file.
 
-## Api
+## MVVM Architecture Pattern
+![mvvm](https://gitlab.com/safe-route/android-app/-/blob/main/Image/mvvm.png)
+This project use mvvm patern for easly to maintain and organizing code.
 
-To use your API go to the folder `mainpackage/api` then customize according to your needs
+## Room Database
+For costumize the database go to `mainpackage/database/DataRoomDatabase.kt`
+`@Database(entities = [DataTraining::class, DataPredict::class], version = 1)`
+and update the version
+
+## Api
+Note: To use your API go to the folder `mainpackage/api` then customize according to your needs
+
+## Feature
+
+- Statistic
+  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/home-screen.png)
+  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/detail-statistic.png)
+
+- Map
+  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/map-screen.png)
+  ![centroid](https://gitlab.com/safe-route/android-app/-/blob/main/Image/centroid-danger-screen.png)
+  ![routing](https://gitlab.com/safe-route/android-app/-/blob/main/Image/routing-screen.png)
+
+- Report
+  ![report crime](https://gitlab.com/safe-route/android-app/-/blob/main/Image/report-sreen.png)
 
 ## Known Issue
-
 - Handle background service efficiently
 - Versioning Roomdatabase
 - UI/UX
