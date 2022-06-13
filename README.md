@@ -39,32 +39,36 @@ No definite structure for this project, this is just basic Android Project Struc
 to access the google maps service, Edit `AndroidManifest.xml` and then place your Google Map Api Key. and also place your Google Map Api Key to this line code `buildConfigField("String", "API_KEY", '"PlAcEYouRAPIkeYHeRE"')` in the Graddle file.
 
 ## MVVM Architecture Pattern
-![mvvm](https://gitlab.com/safe-route/android-app/-/blob/main/Image/mvvm.png)
+
+![mvvm](https://gitlab.com/safe-route/android-app/-/raw/main/Image/mvvm.png)
 This project use mvvm patern for easly to maintain and organizing code.
 
 ## Room Database
+
 For costumize the database go to `mainpackage/database/DataRoomDatabase.kt`
 `@Database(entities = [DataTraining::class, DataPredict::class], version = 1)`
 and update the version
 
 ## Api
+
 Note: To use your API go to the folder `mainpackage/api` then customize according to your needs
 
 ## Feature
 
 - Statistic
-  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/home-screen.png)
-  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/detail-statistic.png)
+  ![alt text](https://gitlab.com/safe-route/android-app/-/raw/main/Image/home-screen.png)
+  ![alt text](https://gitlab.com/safe-route/android-app/-/raw/main/Image/detail-statistic.png)
 
 - Map
-  ![alt text](https://gitlab.com/safe-route/android-app/-/blob/main/Image/map-screen.png)
-  ![centroid](https://gitlab.com/safe-route/android-app/-/blob/main/Image/centroid-danger-screen.png)
-  ![routing](https://gitlab.com/safe-route/android-app/-/blob/main/Image/routing-screen.png)
+  ![alt text](https://gitlab.com/safe-route/android-app/-/raw/main/Image/map-screen.png)
+  ![centroid](https://gitlab.com/safe-route/android-app/-/raw/main/Image/centroid-danger-screen.png)
+  ![routing](https://gitlab.com/safe-route/android-app/-/raw/main/Image/routing-screen.png)
 
 - Report
-  ![report crime](https://gitlab.com/safe-route/android-app/-/blob/main/Image/report-sreen.png)
+  ![report crime](https://gitlab.com/safe-route/android-app/-/raw/main/Image/report-sreen.png)
 
 ## Known Issue
+
 - Handle background service efficiently
 - Versioning Roomdatabase
 - UI/UX
